@@ -5,6 +5,7 @@ import Login from "./welcome/Login"
 import Register from "./welcome/Register"
 import APIManager from "../modules/APIManager"
 import { withRouter } from "react-router"
+import MapPage from "./map/Map";
 
 class ApplicationViews extends Component {
   state = {
@@ -177,6 +178,14 @@ class ApplicationViews extends Component {
           path="/register"
           render={props => {
             return <Register users={this.state.users} setUser={this.props.setUser} {...props} />
+          }}
+        />
+
+        <Route
+          exact
+          path="/triangulate"
+          render={props => {
+            return <MapPage users={this.state.users} locations={this.state.locations} friends={this.state.friends} {...props} />
           }}
         />
       </React.Fragment>

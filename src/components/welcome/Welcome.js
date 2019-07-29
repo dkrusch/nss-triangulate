@@ -3,7 +3,7 @@ import React, { Component } from "react"
 // import ApplicationViews from "./ApplicationViews"
 // import "./Nutshell.css"
 
-class Triangulate extends Component {
+class Welcome extends Component {
   buttonClick = event =>
   {
       if (event.target.id === "login")
@@ -26,4 +26,4 @@ class Triangulate extends Component {
   }
 }
 
-export default Triangulate
+export default Welcome
