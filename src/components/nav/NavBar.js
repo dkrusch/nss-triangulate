@@ -8,6 +8,7 @@ class NavBar extends Component {
 
     logout = () => {
         sessionStorage.clear()
+        this.props.setUser("")
     }
 
     render() {
