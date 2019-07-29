@@ -24,20 +24,21 @@ class MapPage extends Component {
       })
     }
 
-      render() {
+    render() {
         const mapStyles = {
             width: '75%',
             height: '100%',
-          };
+          }
 
+        console.log("what is key", process.env.REACT_APP_GOOGLE_MAP_KEY)
         return (
-            <Map
-              google={this.props.google}
-              zoom={8}
-              style={mapStyles}
-              initialCenter={{ lat: 47.444, lng: -122.176}}
+                <Map
+            google={this.props.google}
+            zoom={8}
+            style={mapStyles}
+            initialCenter={{ lat: 47.444, lng: -122.176}}
             >
-              {this.displayMarkers()}
+            {this.displayMarkers()}
             </Map>
         );
       }
