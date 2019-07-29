@@ -1,85 +1,115 @@
 {
-    "locations": [
-      {
-        "name": "Home",
-        "latitude": "36.1627° N",
-        "longitude": "86.7816° W",
-        "user_id": 1,
-        "central": false,
-        "id": 1
-      },
-      {
-        "name": "Work",
-        "latitude": "35.5951° N",
-        "longitude": "82.5515° W",
-        "user_id": 1,
-        "central": false,
-        "id": 1
-      }
-    ],
-    "friends": [
-      {
-        "id": 1,
-        "user_id": 1,
-        "friend_id": 2
-      },
-      {
-        "id": 3,
-        "user_id": 2,
-        "friend_id": 1
-      },
-      {
-        "friend_id": 2,
-        "user_id": 2,
-        "id": 4
-      },
-      {
-        "friend_id": 3,
-        "user_id": 2,
-        "id": 5
-      },
-      {
-        "friend_id": 3,
-        "user_id": 1,
-        "id": 6
-      }
-    ],
-    "users": [
-      {
-        "id": 1,
-        "email": "1@1.com",
-        "password": "1",
-        "username": "1"
-      },
-      {
-        "id": 2,
-        "email": "2@2.com",
-        "password": "2",
-        "username": "2"
-      },
-      {
-        "id": 3,
-        "email": "1@1.com",
-        "password": "1",
-        "username": "ZZZZZZZZZZZ"
-      },
-      {
-        "id": 4,
-        "email": "2@2.com",
-        "password": "2",
-        "username": "3"
-      },
-      {
-        "id": 5,
-        "email": "1@1.com",
-        "password": "1",
-        "username": "goodbye"
-      },
-      {
-        "id": 6,
-        "email": "2@2.com",
-        "password": "2",
-        "username": "hello"
-      }
-    ]
-  }
+  "locations": [
+    {
+      "name": "Home",
+      "latitude": "36.1627° N",
+      "longitude": "86.7816° W",
+      "user_id": 1,
+      "central": false,
+      "id": 1
+    },
+    {
+      "name": "Work",
+      "latitude": "35.5951° N",
+      "longitude": "82.5515° W",
+      "user_id": 1,
+      "central": false,
+      "id": 1
+    }
+  ],
+  "friends": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "friend_id": 2
+    },
+    {
+      "id": 3,
+      "user_id": 2,
+      "friend_id": 1
+    },
+    {
+      "friend_id": 2,
+      "user_id": 2,
+      "id": 4
+    },
+    {
+      "friend_id": 3,
+      "user_id": 2,
+      "id": 5
+    },
+    {
+      "friend_id": 3,
+      "user_id": 1,
+      "id": 6
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "1@1.com",
+      "password": "1",
+      "username": "1"
+    },
+    {
+      "id": 2,
+      "email": "2@2.com",
+      "password": "2",
+      "username": "2"
+    },
+    {
+      "id": 3,
+      "email": "1@1.com",
+      "password": "1",
+      "username": "ZZZZZZZZZZZ"
+    },
+    {
+      "id": 4,
+      "email": "2@2.com",
+      "password": "2",
+      "username": "3"
+    },
+    {
+      "id": 5,
+      "email": "1@1.com",
+      "password": "1",
+      "username": "goodbye"
+    },
+    {
+      "id": 6,
+      "email": "2@2.com",
+      "password": "2",
+      "username": "hello"
+    },
+    {
+      "username": "newguy",
+      "email": "new@old.com",
+      "password": "oldguy",
+      "id": 7
+    },
+    {
+      "username": "Old",
+      "email": "old@new.com",
+      "password": "notnew",
+      "id": 8
+    },
+    {
+      "username": "newgu",
+      "email": "ne@old.com",
+      "password": "oldguy",
+      "id": 9
+    },
+    {
+      "username": "woiefj",
+      "email": "jfojef",
+      "password": "eapeif",
+      "id": 10
+    },
+    {
+      "username": "5",
+      "email": "5@5.com",
+      "password": "5",
+      "id": 11
+    }
+  ]
+}

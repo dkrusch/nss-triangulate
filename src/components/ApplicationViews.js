@@ -74,6 +74,7 @@ class ApplicationViews extends Component {
       })
       .then(() => this.props.history.push(`/${name}`))
   }
+
   updateMessage = (name, editedObject) => {
     let newObj = {}
     return APIManager.put(name, editedObject)
@@ -159,7 +160,7 @@ class ApplicationViews extends Component {
           path="/welcome"
           render={props => {
             // Render a default page if user is not signed in
-            return <Welcome {...props} />
+            return <Welcome {...props}/>
           }}
         />
 
@@ -175,7 +176,7 @@ class ApplicationViews extends Component {
           exact
           path="/register"
           render={props => {
-            return <Register setUser={this.props.setUser} {...props} />
+            return <Register users={this.state.users} setUser={this.props.setUser} {...props} />
           }}
         />
       </React.Fragment>
