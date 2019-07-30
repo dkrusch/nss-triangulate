@@ -1,0 +1,19 @@
+.MapForm {
+    display: flex;
+    flex-direction: column;
+}
+
+/* .MapContainer {
+    display: flex;
+    flex-direction: row-reverse;
+} */
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+}
+
+label {
+    width: 130px;
+    margin: 0px 10px
+}
