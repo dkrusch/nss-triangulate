@@ -21,9 +21,22 @@ class MapForm extends Component {
   }
 
   checkFields = (event) => {
-      event.preventDefault()
-      this.props.addLocation(this.state)
-      this.clearFields()
+    event.preventDefault()
+
+    // Thank you guy from stack overflow https://stackoverflow.com/questions/22903756/using-regular-expression-to-validate-latitude-and-longitude-coordinates-then-dis
+    const latRegex = /^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,15}/g;
+    const lngRegex = /^-?(([-+]?)([\d]{1,3})((\.)(\d+))?)/g;
+
+    if (latRegex.exec(this.state.latitude) && lngRegex.exec(this.state.longitude))
+    {
+        console.log(this.state.longitude)
+        this.props.addLocation(this.state)
+        this.clearFields()
+    }
+    else
+    {
+     alert("Please enter valid coordinates")
+    }
   };
 
   handleFieldChange = event => {
@@ -46,7 +59,7 @@ class MapForm extends Component {
       <React.Fragment>
         <form className="MapForm">
           <div className="form-group" id="location-1">
-            <label htmlFor="name">Lat 1</label>
+            <label htmlFor="name">Latitude:</label>
             <input
               type="text"
               key="lat"
@@ -55,7 +68,7 @@ class MapForm extends Component {
               onChange={this.handleFieldChange}
               id="lat1"
             />
-            <label htmlFor="date">Long 1</label>
+            <label htmlFor="date">Longitude:</label>
             <input
               type="text"
               key="long"
