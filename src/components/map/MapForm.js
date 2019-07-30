@@ -14,24 +14,26 @@ class MapForm extends Component {
 
   }
 
+  calculateCenter = (event) => {
+    event.preventDefault()
+    this.props.calculateCenter()
+  }
+
   checkFields = (event) => {
       event.preventDefault()
-      console.log(this.state)
       this.props.addLocation(this.state)
       this.clearFields()
   };
 
   handleFieldChange = event => {
-    console.log(event.target.id)
     if (event.target.id.includes("lat"))
     {
-        this.state.latitude = +event.target.value
+        this.setState({latitude: +event.target.value})
     }
     else
     {
-        this.state.longitude = +event.target.value
+        this.setState({longitude: +event.target.value})
     }
-    console.log(this.state)
     // Just fill the latitude and longitude fields for one set of inputs
     // User must start with the first set of inputs and submit that location
   };
@@ -124,7 +126,7 @@ class MapForm extends Component {
           <div className="form-group">
             <button
               type="submit"
-              onClick={this.checkFields}
+              onClick={this.calculateCenter}
               className="btn btn-primary"
             >
               Calculate
