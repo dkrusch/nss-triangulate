@@ -17,7 +17,9 @@ class MapPage extends Component {
 
     degrees = (radians) =>
     {
+        console.log(radians)
         let pi = Math.PI;
+        console.log(pi)
         return radians * (180/pi);
     }
 
@@ -33,7 +35,7 @@ class MapPage extends Component {
     }
 
     displayCenterMarker = () => {
-        console.log(this.state.center)
+        console.log("centermarker", this.state.center)
           return <Marker key={"center"} id={"center-mark"} position={{
            lat: this.state.center.lat,
            lng: this.state.center.lng
@@ -77,12 +79,15 @@ class MapPage extends Component {
         let y = 0;
         let z = 0;
 
-        // Loops over personLocations and finds the some of all the points
+        // Loops over locations and finds the some of all the points
         for (let i = 0; i < this.state.coordinates.length; i++)
         {
-            x += (math.cos(this.state.coordinates[i].latitude) * math.cos(this.state.coordinates[i].longitude));
-            y += (math.cos(this.state.coordinates[i].latitude) * math.sin(this.state.coordinates[i].longitude));
-            z += math.sin(this.state.coordinates[i].latitude);
+            let latitude = this.state.coordinates[i].latitude * Math.PI / 180;
+            let longitude = this.state.coordinates[i].longitude * Math.PI / 180;
+
+            x += (math.cos(latitude) * math.cos(longitude));
+            y += (math.cos(latitude) * math.sin(longitude));
+            z += math.sin(latitude);
         }
 
         // Returns the sums divided by length go get the average
@@ -98,7 +103,8 @@ class MapPage extends Component {
         // Returns the arc tangent of z / hyp in degrees
         let lat = this.degrees(math.atan2(z, hyp));
         let centerLatLng = {lat: lat, lng: lng};
-        this.setState({center: {centerLatLng}})
+        this.setState({center: centerLatLng})
+        this.displayCenterMarker()
         // let marker = new google.maps.Marker(
         // {
         //     position: centerLatLng,
@@ -127,6 +133,7 @@ class MapPage extends Component {
                 initialCenter={this.state.center}
                 >
                 {this.displayMarkers()}
+                {this.displayCenterMarker()}
                 </Map>
                 </div>
             </React.Fragment>

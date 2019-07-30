@@ -71,58 +71,6 @@ class MapForm extends Component {
               Submit
             </button>
           </div>
-          <div className="form-group" id="location-2">
-            <label htmlFor="name">Lat 2</label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              onChange={this.handleFieldChange}
-              id="lat2"
-              value={this.state.eventName}
-            />
-            <label htmlFor="date">Long 2</label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              onChange={this.handleFieldChange}
-              id="long2"
-            />
-            <button
-              type="submit"
-              onClick={this.checkFields}
-              className="btn btn-primary"
-            >
-              Submit
-            </button>
-          </div>
-          <div className="form-group" id="location-3">
-            <label htmlFor="name">Lat 3</label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              onChange={this.handleFieldChange}
-              id="lat3"
-              value={this.state.eventName}
-            />
-            <label htmlFor="date">Long 3</label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              onChange={this.handleFieldChange}
-              id="long3"
-            />
-            <button
-              type="submit"
-              onClick={this.checkFields}
-              className="btn btn-primary"
-            >
-              Submit
-            </button>
-          </div>
           <div className="form-group">
             <button
               type="submit"
