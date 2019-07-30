@@ -5,10 +5,11 @@ import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import MapForm from "./MapForm"
 import * as math from 'mathjs'
 import "./Map.css"
+import { thisTypeAnnotation } from "@babel/types";
 
 class MapPage extends Component {
     state = {
-        coordinates: [{latitude: 47.49855629475769, longitude: -122.14184416996333}],
+        coordinates: [],
         showingInfoWindow: false,  //Hides or the shows the infoWindow
         center: {lat: 47.444, lng: -122.176},          //Shows the active marker upon click
         selectedPlace: {},
@@ -25,23 +26,26 @@ class MapPage extends Component {
 
     displayMarkers = () => {
       console.log(this.state)
-      return this.state.coordinates.map((coordinate, index) => {
-        return <Marker key={index} id={index} position={{
-         lat: coordinate.latitude,
-         lng: coordinate.longitude
-       }}
-       onClick={() => console.log("You clicked me!")} />
+      return this.state.coordinates.map((coordinate, index) =>
+      {
+        if (coordinate.style === "normal")
+        {
+            return <Marker key={index} id={index} position={{
+             lat: coordinate.latitude,
+             lng: coordinate.longitude
+           }}
+           onClick={() => console.log("You clicked me!")} />
+        }
+        else
+        {
+            return <Marker key={index} id={index} icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" position={{
+                lat: coordinate.latitude,
+                lng: coordinate.longitude
+              }}
+              onClick={() => console.log("You clicked me!")} />
+        }
       })
     }
-
-    displayCenterMarker = () => {
-        console.log("centermarker", this.state.center)
-          return <Marker key={"center"} id={"center-mark"} position={{
-           lat: this.state.center.lat,
-           lng: this.state.center.lng
-         }}
-         onClick={() => console.log("You clicked me!")} />
-      }
 
     addLocation = (latlong) => {
         console.log("latlong", latlong)
@@ -82,6 +86,7 @@ class MapPage extends Component {
         // Loops over locations and finds the some of all the points
         for (let i = 0; i < this.state.coordinates.length; i++)
         {
+            // Convert the coordinate to degrees?
             let latitude = this.state.coordinates[i].latitude * Math.PI / 180;
             let longitude = this.state.coordinates[i].longitude * Math.PI / 180;
 
@@ -102,9 +107,10 @@ class MapPage extends Component {
         let hyp = math.sqrt(x * x + y * y);
         // Returns the arc tangent of z / hyp in degrees
         let lat = this.degrees(math.atan2(z, hyp));
-        let centerLatLng = {lat: lat, lng: lng};
-        this.setState({center: centerLatLng})
-        this.displayCenterMarker()
+        let centerLatLng = {latitude: lat, longitude: lng, style: "center"};
+        // change this so it goes inc coordinates instead with a style attribute
+        let newCoords = [...this.state.coordinates]
+        this.setState({coordinates: newCoords.concat(centerLatLng)})
         // let marker = new google.maps.Marker(
         // {
         //     position: centerLatLng,
@@ -133,7 +139,6 @@ class MapPage extends Component {
                 initialCenter={this.state.center}
                 >
                 {this.displayMarkers()}
-                {this.displayCenterMarker()}
                 </Map>
                 </div>
             </React.Fragment>

@@ -6,7 +6,8 @@ class MapForm extends Component {
   // If the submit button is clicked post the state object to the database
   state = {
       latitude: "",
-      longitude: ""
+      longitude: "",
+      style: "normal"
   };
 
   clearFields = () =>
