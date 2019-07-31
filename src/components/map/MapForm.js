@@ -25,7 +25,7 @@ class MapForm extends Component {
     let forms = document.querySelectorAll(".form-group")
     Array.from(forms).map(form => form.style.display = "none")
     console.log(forms)
-    document.querySelector(`#${name}-form`).style.display = "block"
+    document.querySelector(`#${name}-form`).style.display = "flex"
   }
 
   checkManualFields = (event) => {
@@ -111,15 +111,14 @@ class MapForm extends Component {
             </button>
           </div>
           <div className="form-group" style={dontshow} id="friend-form">
-            <label htmlFor="name">Friend:</label>
-            <input
-              type="text"
-              key="lat"
-              required
-              className="form-control"
-              onChange={this.handleFieldChange}
-              id="lat1"
-            />
+            <label htmlFor="name">Friends:</label>
+            <select className="friend-option">
+                {this.props.userFriends.map((friend, i) =>
+                    {
+                        return <option key={`friend-option-${i}`} value={`${friend.username}`}>{friend.username}</option>
+                    }
+                    )}
+            </select>
             <label htmlFor="date">Longitude:</label>
             <input
               type="text"

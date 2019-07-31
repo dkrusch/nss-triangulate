@@ -12,9 +12,31 @@ class ApplicationViews extends Component {
     locations: [],
     friends: [],
     users: [],
-    userLocations: []
+    userLocations: [],
+    userFriends: []
   }
 
+  getFriends = () => {
+    const id = +sessionStorage.getItem("activeUser")
+    console.log(this.state.friends)
+    console.log(this.state.users)
+    const friendIds = this.state.friends.filter(friend => friend.user_id === id || friend.friend_id === id)
+    .map(friend =>
+        {
+            if (friend.user_id === id)
+            {
+                return friend.friend_id
+            }
+            else
+            {
+                return friend.user_id
+            }
+        })
+    console.log("friendids", friendIds)
+    let userFriends = this.state.users.filter(user => friendIds.includes(user.id))
+    console.log(userFriends)
+    this.setState({userFriends: userFriends})
+  }
 
   //Methods to be passed to components
   likeItem = (name, word) => {
@@ -63,6 +85,7 @@ class ApplicationViews extends Component {
         this.props.history.push(`/${name}`)
       })
   }
+
   updateItem = (name, editedObject) => {
     let newObj = {}
     return APIManager.put(name, editedObject)
@@ -134,7 +157,7 @@ class ApplicationViews extends Component {
       .then(allLocations => (newState.locations = allLocations))
       .then(() => APIManager.getLike("locations", +sessionStorage.getItem("activeUser")))
       .then(userPlaces => (newState.userLocations = userPlaces))
-      .then(() => this.setState(newState))
+      .then(() => this.setState(newState, () => this.getFriends()))
   }
 
   // check session storage for value, return true or false
@@ -188,7 +211,7 @@ class ApplicationViews extends Component {
           exact
           path="/triangulate"
           render={props => {
-            return <MapPage users={this.state.users} locations={this.state.locations} userLocations={this.state.userLocations} friends={this.state.friends} {...props} />
+            return <MapPage users={this.state.users} locations={this.state.locations} userLocations={this.state.userLocations} userFriends={this.state.userFriends} {...props} />
           }}
         />
       </React.Fragment>

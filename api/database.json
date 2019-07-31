@@ -24,11 +24,6 @@
       "friend_id": 2
     },
     {
-      "id": 3,
-      "user_id": 2,
-      "friend_id": 1
-    },
-    {
       "friend_id": 2,
       "user_id": 2,
       "id": 4
