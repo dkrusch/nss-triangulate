@@ -13,13 +13,13 @@ class ApplicationViews extends Component {
     friends: [],
     users: [],
     userLocations: [],
-    userFriends: []
+    userFriends: [],
+    friendLocations: [],
+    selectedFriend: ""
   }
 
   getFriends = () => {
     const id = +sessionStorage.getItem("activeUser")
-    console.log(this.state.friends)
-    console.log(this.state.users)
     const friendIds = this.state.friends.filter(friend => friend.user_id === id || friend.friend_id === id)
     .map(friend =>
         {
@@ -32,11 +32,22 @@ class ApplicationViews extends Component {
                 return friend.user_id
             }
         })
-    console.log("friendids", friendIds)
+
     let userFriends = this.state.users.filter(user => friendIds.includes(user.id))
-    console.log(userFriends)
+
     this.setState({userFriends: userFriends})
   }
+
+  setFriend = (friend) => {
+    this.setState({selectedFriend: friend}, () =>
+    {
+        return (APIManager.getLike("locations", friend)
+        .then(locations => this.setState({friendLocations: locations})))
+    }
+    )
+  }
+
+
 
   //Methods to be passed to components
   likeItem = (name, word) => {
@@ -211,7 +222,7 @@ class ApplicationViews extends Component {
           exact
           path="/triangulate"
           render={props => {
-            return <MapPage users={this.state.users} locations={this.state.locations} userLocations={this.state.userLocations} userFriends={this.state.userFriends} {...props} />
+            return <MapPage users={this.state.users} locations={this.state.locations} setFriend={this.setFriend} getFriendlocations={this.getFriendlocations} userLocations={this.state.userLocations} userFriends={this.state.userFriends} friendLocations={this.state.friendLocations} {...props} />
           }}
         />
       </React.Fragment>

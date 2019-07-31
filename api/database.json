@@ -14,7 +14,39 @@
       "longitude": "-82.5515",
       "user_id": 1,
       "central": false,
-      "id": 1
+      "id": 2
+    },
+    {
+      "name": "Home2",
+      "latitude": "35.5951",
+      "longitude": "-82.5515",
+      "user_id": 2,
+      "central": false,
+      "id": 3
+    },
+    {
+      "name": "Work2",
+      "latitude": "35.5951",
+      "longitude": "-82.5515",
+      "user_id": 2,
+      "central": false,
+      "id": 4
+    },
+    {
+      "name": "Home3",
+      "latitude": "35.5951",
+      "longitude": "-82.5515",
+      "user_id": 3,
+      "central": false,
+      "id": 5
+    },
+    {
+      "name": "Work3",
+      "latitude": "35.5951",
+      "longitude": "-82.5515",
+      "user_id": 3,
+      "central": false,
+      "id": 6
     }
   ],
   "friends": [

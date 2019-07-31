@@ -131,7 +131,7 @@ class MapPage extends Component {
         return (
             <React.Fragment>
                 <section>
-                    <MapForm addLocation={this.addLocation} userLocations={this.props.userLocations} userFriends={this.props.userFriends} calculateCenter={this.calculateCenter}/>
+                    <MapForm addLocation={this.addLocation} setFriend={this.props.setFriend} getFriendLocations={this.props.getFriendLocations} friendLocations={this.props.friendLocations} userLocations={this.props.userLocations} userFriends={this.props.userFriends} locations={this.props.locations} calculateCenter={this.calculateCenter}/>
                     <div className="MapContainer">
                         <Map
                         google={this.props.google}

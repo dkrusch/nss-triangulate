@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FriendLocations from "./FriendLocations"
 import "./Map.css"
 
 class MapForm extends Component {
@@ -7,7 +8,8 @@ class MapForm extends Component {
   state = {
       latitude: "",
       longitude: "",
-      style: "normal"
+      style: "normal",
+      selectedFriend: ""
   };
 
   clearFields = () =>
@@ -58,6 +60,10 @@ class MapForm extends Component {
     this.setState(
         {latitude: +selectedLocation.latitude, longitude: +selectedLocation.longitude},
         () => this.props.addLocation(this.state))
+  };
+
+  generateFriendLocations = event => {
+    this.props.setFriend(event.target.value.split("-")[1])
   };
 
   handleFieldChange = event => {
@@ -112,25 +118,19 @@ class MapForm extends Component {
           </div>
           <div className="form-group" style={dontshow} id="friend-form">
             <label htmlFor="name">Friends:</label>
-            <select className="friend-option">
+            <select className="friend-option" onChange={this.generateFriendLocations}>
+                <option key={`friend-option-0`} value="" defaultValue>Pick a friend...</option>
                 {this.props.userFriends.map((friend, i) =>
                     {
-                        return <option key={`friend-option-${i}`} value={`${friend.username}`}>{friend.username}</option>
+                        return <option key={`friend-option-${i+1}`} value={`friend-${friend.id}`} id={`friend-${friend.id}`}>{friend.username}</option>
                     }
                     )}
             </select>
-            <label htmlFor="date">Longitude:</label>
-            <input
-              type="text"
-              key="long"
-              required
-              className="form-control"
-              onChange={this.handleFieldChange}
-              id="long1"
-            />
+            <label htmlFor="date">Their Locations:</label>
+            <FriendLocations friendLocations={this.props.friendLocations}/>
             <button
               type="submit"
-              onClick={this.checkManualFields}
+              onClick={this.checkDropdown}
               className="btn btn-primary"
             >
               Submit
