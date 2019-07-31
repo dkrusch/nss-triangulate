@@ -20,6 +20,14 @@ class MapForm extends Component {
     this.props.calculateCenter()
   }
 
+  showDiv = (event) => {
+    let name = event.target.value
+    let forms = document.querySelectorAll(".form-group")
+    Array.from(forms).map(form => form.style.display = "none")
+    console.log(forms)
+    document.querySelector(`#${name}-form`).style.display = "block"
+  }
+
   checkFields = (event) => {
     event.preventDefault()
 
@@ -55,10 +63,76 @@ class MapForm extends Component {
   // Renders an input for name date and location
   render() {
     //if there is an active user
+    let dontshow = {
+        display: "none"
+      };
+
     return (
       <React.Fragment>
         <form className="MapForm">
-          <div className="form-group" id="location-1">
+          <section className="radio-choice">
+            <input type="radio" name="inputtype" value="user" onClick={this.showDiv}></input>
+            <label htmlFor="user">Your Locations</label>
+            <input type="radio" name="inputtype" value="friend" onClick={this.showDiv}></input>
+            <label htmlFor="friend">Friend Locations</label>
+            <input type="radio" name="inputtype" value="manual" onClick={this.showDiv} defaultChecked></input>
+            <label htmlFor="manual">Manual Location</label>
+          </section>
+          <div className="form-group" style={dontshow} id="user-form">
+            <label htmlFor="name">User:</label>
+            <input
+              type="text"
+              key="lat"
+              required
+              className="form-control"
+              onChange={this.handleFieldChange}
+              id="lat1"
+            />
+            <label htmlFor="date">Longitude:</label>
+            <input
+              type="text"
+              key="long"
+              required
+              className="form-control"
+              onChange={this.handleFieldChange}
+              id="long1"
+            />
+            <button
+              type="submit"
+              onClick={this.checkFields}
+              className="btn btn-primary"
+            >
+              Submit
+            </button>
+          </div>
+          <div className="form-group" style={dontshow} id="friend-form">
+            <label htmlFor="name">Friend:</label>
+            <input
+              type="text"
+              key="lat"
+              required
+              className="form-control"
+              onChange={this.handleFieldChange}
+              id="lat1"
+            />
+            <label htmlFor="date">Longitude:</label>
+            <input
+              type="text"
+              key="long"
+              required
+              className="form-control"
+              onChange={this.handleFieldChange}
+              id="long1"
+            />
+            <button
+              type="submit"
+              onClick={this.checkFields}
+              className="btn btn-primary"
+            >
+              Submit
+            </button>
+          </div>
+          <div className="form-group" id="manual-form">
             <label htmlFor="name">Latitude:</label>
             <input
               type="text"
@@ -85,7 +159,7 @@ class MapForm extends Component {
               Submit
             </button>
           </div>
-          <div className="form-group">
+          <div className="submit-group">
             <button
               type="submit"
               onClick={this.calculateCenter}
