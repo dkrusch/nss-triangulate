@@ -20,7 +20,15 @@ class MapForm extends Component {
     this.props.calculateCenter()
   }
 
-  checkFields = (event) => {
+  showDiv = (event) => {
+    let name = event.target.value
+    let forms = document.querySelectorAll(".form-group")
+    Array.from(forms).map(form => form.style.display = "none")
+    console.log(forms)
+    document.querySelector(`#${name}-form`).style.display = "block"
+  }
+
+  checkManualFields = (event) => {
     event.preventDefault()
 
     // Thank you guy from stack overflow https://stackoverflow.com/questions/22903756/using-regular-expression-to-validate-latitude-and-longitude-coordinates-then-dis
@@ -39,6 +47,19 @@ class MapForm extends Component {
     }
   };
 
+  checkDropdown = event => {
+    event.preventDefault()
+
+    let id = event.target.id.split("-")[0]
+    let dropdown = document.querySelector(`.${id}-location`)
+    let selectedLocation = this.props.userLocations.find(location => location.name === dropdown.value)
+
+    // Sets the state with the values from the dropdowns, waits, then sends the state into the passed function
+    this.setState(
+        {latitude: +selectedLocation.latitude, longitude: +selectedLocation.longitude},
+        () => this.props.addLocation(this.state))
+  };
+
   handleFieldChange = event => {
     if (event.target.id.includes("lat"))
     {
@@ -52,13 +73,71 @@ class MapForm extends Component {
     // User must start with the first set of inputs and submit that location
   };
 
+
   // Renders an input for name date and location
   render() {
     //if there is an active user
+    let dontshow = {
+        display: "none"
+      };
+
     return (
       <React.Fragment>
         <form className="MapForm">
-          <div className="form-group" id="location-1">
+          <section className="radio-choice">
+            <input type="radio" name="inputtype" value="user" onClick={this.showDiv}></input>
+            <label htmlFor="user">Your Locations</label>
+            <input type="radio" name="inputtype" value="friend" onClick={this.showDiv}></input>
+            <label htmlFor="friend">Friend Locations</label>
+            <input type="radio" name="inputtype" value="manual" onClick={this.showDiv} defaultChecked></input>
+            <label htmlFor="manual">Manual Location</label>
+          </section>
+          <div className="form-group" style={dontshow} id="user-form">
+            <label htmlFor="name">Saved Locations:</label>
+            <select className="user-location">
+                {this.props.userLocations.map((location, i) =>
+                    {
+                        return <option key={`user-location-${i}`} value={`${location.name}`}>{location.name}</option>
+                    }
+                    )}
+            </select>
+            <button
+              type="submit"
+              id="user-submit"
+              onClick={this.checkDropdown}
+              className="btn btn-primary"
+            >
+              Submit
+            </button>
+          </div>
+          <div className="form-group" style={dontshow} id="friend-form">
+            <label htmlFor="name">Friend:</label>
+            <input
+              type="text"
+              key="lat"
+              required
+              className="form-control"
+              onChange={this.handleFieldChange}
+              id="lat1"
+            />
+            <label htmlFor="date">Longitude:</label>
+            <input
+              type="text"
+              key="long"
+              required
+              className="form-control"
+              onChange={this.handleFieldChange}
+              id="long1"
+            />
+            <button
+              type="submit"
+              onClick={this.checkManualFields}
+              className="btn btn-primary"
+            >
+              Submit
+            </button>
+          </div>
+          <div className="form-group" id="manual-form">
             <label htmlFor="name">Latitude:</label>
             <input
               type="text"
@@ -79,13 +158,13 @@ class MapForm extends Component {
             />
             <button
               type="submit"
-              onClick={this.checkFields}
+              onClick={this.checkManualFields}
               className="btn btn-primary"
             >
               Submit
             </button>
           </div>
-          <div className="form-group">
+          <div className="submit-group">
             <button
               type="submit"
               onClick={this.calculateCenter}

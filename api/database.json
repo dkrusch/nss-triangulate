@@ -2,16 +2,16 @@
   "locations": [
     {
       "name": "Home",
-      "latitude": "36.1627° N",
-      "longitude": "86.7816° W",
+      "latitude": "36.1627",
+      "longitude": "-86.7816",
       "user_id": 1,
       "central": false,
       "id": 1
     },
     {
       "name": "Work",
-      "latitude": "35.5951° N",
-      "longitude": "82.5515° W",
+      "latitude": "35.5951",
+      "longitude": "-82.5515",
       "user_id": 1,
       "central": false,
       "id": 1

@@ -130,17 +130,19 @@ class MapPage extends Component {
         console.log("what is key", process.env.REACT_APP_GOOGLE_MAP_KEY)
         return (
             <React.Fragment>
-                <div className="MapContainer">
-                <MapForm addLocation={this.addLocation} calculateCenter={this.calculateCenter}/>
-                <Map
-                google={this.props.google}
-                zoom={8}
-                style={mapStyles}
-                initialCenter={this.state.center}
-                >
-                {this.displayMarkers()}
-                </Map>
-                </div>
+                <section>
+                    <MapForm addLocation={this.addLocation} userLocations={this.props.userLocations} calculateCenter={this.calculateCenter}/>
+                    <div className="MapContainer">
+                        <Map
+                        google={this.props.google}
+                        zoom={8}
+                        style={mapStyles}
+                        initialCenter={this.state.center}
+                        >
+                        {this.displayMarkers()}
+                        </Map>
+                    </div>
+                </section>
             </React.Fragment>
         );
       }
