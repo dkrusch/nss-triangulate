@@ -28,7 +28,7 @@ class MapForm extends Component {
     document.querySelector(`#${name}-form`).style.display = "block"
   }
 
-  checkFields = (event) => {
+  checkManualFields = (event) => {
     event.preventDefault()
 
     // Thank you guy from stack overflow https://stackoverflow.com/questions/22903756/using-regular-expression-to-validate-latitude-and-longitude-coordinates-then-dis
@@ -47,6 +47,19 @@ class MapForm extends Component {
     }
   };
 
+  checkDropdown = event => {
+    event.preventDefault()
+
+    let id = event.target.id.split("-")[0]
+    let dropdown = document.querySelector(`.${id}-location`)
+    let selectedLocation = this.props.userLocations.find(location => location.name === dropdown.value)
+
+    // Sets the state with the values from the dropdowns, waits, then sends the state into the passed function
+    this.setState(
+        {latitude: +selectedLocation.latitude, longitude: +selectedLocation.longitude},
+        () => this.props.addLocation(this.state))
+  };
+
   handleFieldChange = event => {
     if (event.target.id.includes("lat"))
     {
@@ -59,6 +72,7 @@ class MapForm extends Component {
     // Just fill the latitude and longitude fields for one set of inputs
     // User must start with the first set of inputs and submit that location
   };
+
 
   // Renders an input for name date and location
   render() {
@@ -79,27 +93,18 @@ class MapForm extends Component {
             <label htmlFor="manual">Manual Location</label>
           </section>
           <div className="form-group" style={dontshow} id="user-form">
-            <label htmlFor="name">User:</label>
-            <input
-              type="text"
-              key="lat"
-              required
-              className="form-control"
-              onChange={this.handleFieldChange}
-              id="lat1"
-            />
-            <label htmlFor="date">Longitude:</label>
-            <input
-              type="text"
-              key="long"
-              required
-              className="form-control"
-              onChange={this.handleFieldChange}
-              id="long1"
-            />
+            <label htmlFor="name">Saved Locations:</label>
+            <select className="user-location">
+                {this.props.userLocations.map((location, i) =>
+                    {
+                        return <option key={`user-location-${i}`} value={`${location.name}`}>{location.name}</option>
+                    }
+                    )}
+            </select>
             <button
               type="submit"
-              onClick={this.checkFields}
+              id="user-submit"
+              onClick={this.checkDropdown}
               className="btn btn-primary"
             >
               Submit
@@ -126,7 +131,7 @@ class MapForm extends Component {
             />
             <button
               type="submit"
-              onClick={this.checkFields}
+              onClick={this.checkManualFields}
               className="btn btn-primary"
             >
               Submit
@@ -153,7 +158,7 @@ class MapForm extends Component {
             />
             <button
               type="submit"
-              onClick={this.checkFields}
+              onClick={this.checkManualFields}
               className="btn btn-primary"
             >
               Submit

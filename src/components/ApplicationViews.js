@@ -10,7 +10,9 @@ import MapPage from "./map/Map";
 class ApplicationViews extends Component {
   state = {
     locations: [],
-    friends: []
+    friends: [],
+    users: [],
+    userLocations: []
   }
 
 
@@ -128,9 +130,10 @@ class ApplicationViews extends Component {
       .then(allUsers => (newState.users = allUsers))
       .then(() => APIManager.getAll("friends"))
       .then(allFriends => (newState.friends = allFriends))
-      .then(() =>
-        APIManager.getAll("locations"))
+      .then(() => APIManager.getAll("locations"))
       .then(allLocations => (newState.locations = allLocations))
+      .then(() => APIManager.getLike("locations", +sessionStorage.getItem("activeUser")))
+      .then(userPlaces => (newState.userLocations = userPlaces))
       .then(() => this.setState(newState))
   }
 
@@ -185,7 +188,7 @@ class ApplicationViews extends Component {
           exact
           path="/triangulate"
           render={props => {
-            return <MapPage users={this.state.users} locations={this.state.locations} friends={this.state.friends} {...props} />
+            return <MapPage users={this.state.users} locations={this.state.locations} userLocations={this.state.userLocations} friends={this.state.friends} {...props} />
           }}
         />
       </React.Fragment>

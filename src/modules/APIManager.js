@@ -43,7 +43,7 @@ export default Object.create(null, {
   },
   getLike: {
     value (name, word) {
-      return fetch(`${remoteURL}/${name}?username_like=${word}`).then(data => data.json());
+      return fetch(`${remoteURL}/${name}?user_id_like=${word}`).then(data => data.json());
     }
   }
 })
