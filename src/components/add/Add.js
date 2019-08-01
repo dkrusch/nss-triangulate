@@ -10,17 +10,35 @@ class Add extends Component {
     friends: []
   }
 
-  showDiv = (event) => {
+  handleFieldChange = event => {
+    const stateToChange = {};
+    let key = event.target.id.split("-")[0]
+    stateToChange[key] = event.target.value;
+    this.setState(stateToChange);
+  };
+
+  showDiv = (event, object) => {
     let id = event.target.id.split("-")[2]
     let type = event.target.id.split("-")[0]
+    this.setState({name: object.name})
+    this.setState({latitude: object.latitude})
+    this.setState({longitude: object.longitude})
     if (type === "edit")
     {
         console.log("id", id)
         document.getElementById(`show-location-${id}`).style.display = "none"
         document.getElementById(`edit-location-${id}`).style.display = "flex"
+        document.getElementById(`name-${id}`).value = object.name
+        document.getElementById(`latitude-${id}`).value = object.latitude
+        document.getElementById(`longitude-${id}`).value = object.longitude
     }
     else
     {
+        object.name = this.state.name
+        object.latitude = this.state.latitude
+        object.longitude = this.state.longitude
+        console.log(this.state, object)
+        this.props.updateItem("locations", object)
         document.getElementById(`show-location-${id}`).style.display = "flex"
         document.getElementById(`edit-location-${id}`).style.display = "none"
     }
@@ -55,7 +73,7 @@ class Add extends Component {
                                             <h6>Longitude: {location.longitude}</h6>
                                             <button
                                             type="submit"
-                                            onClick={this.showDiv}
+                                            onClick={(e) => this.showDiv(e, location)}
                                             className="btn btn-primary"
                                             id={`edit-button-${location.id}`}
                                             >
@@ -70,7 +88,7 @@ class Add extends Component {
                                         required
                                         className="form-control"
                                         onChange={this.handleFieldChange}
-                                        id="lat1"
+                                        id={`name-${location.id}`}
                                         />
                                         <label htmlFor="name">Latitude:</label>
                                         <input
@@ -78,7 +96,7 @@ class Add extends Component {
                                         required
                                         className="form-control"
                                         onChange={this.handleFieldChange}
-                                        id="lat1"
+                                        id={`latitude-${location.id}`}
                                         />
                                         <label htmlFor="date">Longitude:</label>
                                         <input
@@ -87,11 +105,11 @@ class Add extends Component {
                                         required
                                         className="form-control"
                                         onChange={this.handleFieldChange}
-                                        id="long1"
+                                        id={`longitude-${location.id}`}
                                         />
                                         <button
                                         type="submit"
-                                        onClick={this.showDiv}
+                                        onClick={(e) => this.showDiv(e, location)}
                                         className="btn btn-primary"
                                         id={`submit-button-${location.id}`}
                                         >

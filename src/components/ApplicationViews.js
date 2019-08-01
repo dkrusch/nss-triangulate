@@ -81,6 +81,7 @@ class ApplicationViews extends Component {
         this.props.history.push(`/${name}`)
       })
   }
+
   deleteMessage = (name, id) => {
     console.log("inside delete item")
     let newObj = {}
@@ -99,18 +100,9 @@ class ApplicationViews extends Component {
   }
 
   updateItem = (name, editedObject) => {
-    let newObj = {}
     return APIManager.put(name, editedObject)
-      .then(() =>
-        APIManager.getAll(
-          `${name}?user_id=${+sessionStorage.getItem("activeUser")}`
-        )
-      )
-      .then(item => {
-        newObj[name] = item
-        this.setState(newObj)
-      })
-      .then(() => this.props.history.push(`/${name}`))
+    .then(() => APIManager.getLike("locations", +sessionStorage.getItem("activeUser")))
+    .then(userPlaces => this.setState({userLocations: userPlaces}))
   }
 
   updateMessage = (name, editedObject) => {
@@ -222,7 +214,7 @@ class ApplicationViews extends Component {
           exact
           path="/add"
           render={props => {
-            return <Add users={this.state.users} addItem={this.addItem} userLocations={this.state.userLocations} userFriends={this.state.userFriends} {...props} />
+            return <Add users={this.state.users} updateItem={this.updateItem} addItem={this.addItem} userLocations={this.state.userLocations} userFriends={this.state.userFriends} {...props} />
           }}
         />
       </React.Fragment>
