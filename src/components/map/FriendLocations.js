@@ -10,19 +10,17 @@ class FriendLocations extends Component {
   // Renders an input for name date and location
   render() {
     //if there is an active user
-    console.log(this.props.locations)
-    console.log(this.props.selectedFriend)
 
     return (
       <React.Fragment>
-            <select className="friend-option" onChange={this.generateFriendLocations}>
-                <option key={`friend-option-0`} value="" defaultValue>Pick a location...</option>
+            <select className="friend-location" onChange={this.generateFriendLocations}>
+                <option key={`friend-location-0`} value="" defaultValue>Pick a location...</option>
                 {
                     this.props.friendLocations
                     .map((location, i) =>
                     {
                         console.log("location", location)
-                        return <option key={`user-location-${i}`} value={`${location.name}`}>{location.name}</option>
+                        return <option key={`friend-location-${i}`} value={`${location.name}`}>{location.name}</option>
                     })
                 }
             </select>

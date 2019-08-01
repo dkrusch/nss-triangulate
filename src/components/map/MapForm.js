@@ -52,9 +52,10 @@ class MapForm extends Component {
   checkDropdown = event => {
     event.preventDefault()
 
+    // the submit button id
     let id = event.target.id.split("-")[0]
     let dropdown = document.querySelector(`.${id}-location`)
-    let selectedLocation = this.props.userLocations.find(location => location.name === dropdown.value)
+    let selectedLocation = this.props.locations.find(location => location.name === dropdown.value)
 
     // Sets the state with the values from the dropdowns, waits, then sends the state into the passed function
     this.setState(
@@ -130,6 +131,7 @@ class MapForm extends Component {
             <FriendLocations friendLocations={this.props.friendLocations}/>
             <button
               type="submit"
+              id="friend-submit"
               onClick={this.checkDropdown}
               className="btn btn-primary"
             >
