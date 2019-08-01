@@ -4,6 +4,7 @@ import Welcome from "./welcome/Welcome"
 import Login from "./welcome/Login"
 import Register from "./welcome/Register"
 import APIManager from "../modules/APIManager"
+import Add from "./add/Add"
 import { withRouter } from "react-router"
 import MapPage from "./map/Map";
 
@@ -128,20 +129,11 @@ class ApplicationViews extends Component {
   }
 
   addItem = (name, item) => {
-    let newObj = {}
     APIManager.post(name, item)
-      .then(() =>
-        APIManager.getAll(
-          `${name}?user_id=${+sessionStorage.getItem("activeUser")}`
-        )
-      )
-      .then(items => {
-        newObj[name] = items
-        this.setState(newObj)
-      })
-      .then(() => this.props.history.push("/"))
-      .then(() => this.props.history.push(`/${name}`))
+    .then(() => APIManager.getLike("locations", +sessionStorage.getItem("activeUser")))
+    .then(userPlaces => this.setState({userLocations: userPlaces}))
   }
+
   addMessage = (name, item) => {
     let newObj = {}
     APIManager.post(name, item)
@@ -223,6 +215,14 @@ class ApplicationViews extends Component {
           path="/triangulate"
           render={props => {
             return <MapPage users={this.state.users} locations={this.state.locations} setFriend={this.setFriend} getFriendlocations={this.getFriendlocations} userLocations={this.state.userLocations} userFriends={this.state.userFriends} friendLocations={this.state.friendLocations} {...props} />
+          }}
+        />
+
+        <Route
+          exact
+          path="/add"
+          render={props => {
+            return <Add users={this.state.users} addItem={this.addItem} userLocations={this.state.userLocations} userFriends={this.state.userFriends} {...props} />
           }}
         />
       </React.Fragment>
