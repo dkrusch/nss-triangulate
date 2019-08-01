@@ -17,27 +17,30 @@ class Add extends Component {
     this.setState(stateToChange);
   };
 
+  setObject = (object) => {
+      this.setState({name: object.name})
+      this.setState({latitude: object.latitude})
+      this.setState({longitude: object.longitude})
+
+  }
+
   showDiv = (event, object) => {
     let id = event.target.id.split("-")[2]
     let type = event.target.id.split("-")[0]
-    this.setState({name: object.name})
-    this.setState({latitude: object.latitude})
-    this.setState({longitude: object.longitude})
+    this.setObject(object)
     if (type === "edit")
     {
-        console.log("id", id)
-        document.getElementById(`show-location-${id}`).style.display = "none"
-        document.getElementById(`edit-location-${id}`).style.display = "flex"
         document.getElementById(`name-${id}`).value = object.name
         document.getElementById(`latitude-${id}`).value = object.latitude
         document.getElementById(`longitude-${id}`).value = object.longitude
+        document.getElementById(`show-location-${id}`).style.display = "none"
+        document.getElementById(`edit-location-${id}`).style.display = "flex"
     }
     else
     {
         object.name = this.state.name
         object.latitude = this.state.latitude
         object.longitude = this.state.longitude
-        console.log(this.state, object)
         this.props.updateItem("locations", object)
         document.getElementById(`show-location-${id}`).style.display = "flex"
         document.getElementById(`edit-location-${id}`).style.display = "none"
