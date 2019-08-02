@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FriendLocations from "./FriendLocations"
 import "./Map.css"
 
 class MapForm extends Component {
@@ -7,7 +8,8 @@ class MapForm extends Component {
   state = {
       latitude: "",
       longitude: "",
-      style: "normal"
+      style: "normal",
+      selectedFriend: ""
   };
 
   clearFields = () =>
@@ -25,7 +27,7 @@ class MapForm extends Component {
     let forms = document.querySelectorAll(".form-group")
     Array.from(forms).map(form => form.style.display = "none")
     console.log(forms)
-    document.querySelector(`#${name}-form`).style.display = "block"
+    document.querySelector(`#${name}-form`).style.display = "flex"
   }
 
   checkManualFields = (event) => {
@@ -50,14 +52,19 @@ class MapForm extends Component {
   checkDropdown = event => {
     event.preventDefault()
 
+    // the submit button id
     let id = event.target.id.split("-")[0]
     let dropdown = document.querySelector(`.${id}-location`)
-    let selectedLocation = this.props.userLocations.find(location => location.name === dropdown.value)
+    let selectedLocation = this.props.locations.find(location => location.name === dropdown.value)
 
     // Sets the state with the values from the dropdowns, waits, then sends the state into the passed function
     this.setState(
         {latitude: +selectedLocation.latitude, longitude: +selectedLocation.longitude},
         () => this.props.addLocation(this.state))
+  };
+
+  generateFriendLocations = event => {
+    this.props.setFriend(event.target.value.split("-")[1])
   };
 
   handleFieldChange = event => {
@@ -111,27 +118,21 @@ class MapForm extends Component {
             </button>
           </div>
           <div className="form-group" style={dontshow} id="friend-form">
-            <label htmlFor="name">Friend:</label>
-            <input
-              type="text"
-              key="lat"
-              required
-              className="form-control"
-              onChange={this.handleFieldChange}
-              id="lat1"
-            />
-            <label htmlFor="date">Longitude:</label>
-            <input
-              type="text"
-              key="long"
-              required
-              className="form-control"
-              onChange={this.handleFieldChange}
-              id="long1"
-            />
+            <label htmlFor="name">Friends:</label>
+            <select className="friend-option" onChange={this.generateFriendLocations}>
+                <option key={`friend-option-0`} value="" defaultValue>Pick a friend...</option>
+                {this.props.userFriends.map((friend, i) =>
+                    {
+                        return <option key={`friend-option-${i+1}`} value={`friend-${friend.id}`} id={`friend-${friend.id}`}>{friend.username}</option>
+                    }
+                    )}
+            </select>
+            <label htmlFor="date">Their Locations:</label>
+            <FriendLocations friendLocations={this.props.friendLocations}/>
             <button
               type="submit"
-              onClick={this.checkManualFields}
+              id="friend-submit"
+              onClick={this.checkDropdown}
               className="btn btn-primary"
             >
               Submit

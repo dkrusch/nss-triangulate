@@ -4,6 +4,7 @@ import Welcome from "./welcome/Welcome"
 import Login from "./welcome/Login"
 import Register from "./welcome/Register"
 import APIManager from "../modules/APIManager"
+import Add from "./add/Add"
 import { withRouter } from "react-router"
 import MapPage from "./map/Map";
 
@@ -12,8 +13,41 @@ class ApplicationViews extends Component {
     locations: [],
     friends: [],
     users: [],
-    userLocations: []
+    userLocations: [],
+    userFriends: [],
+    friendLocations: [],
+    selectedFriend: ""
   }
+
+  getFriends = () => {
+    const id = +sessionStorage.getItem("activeUser")
+    const friendIds = this.state.friends.filter(friend => friend.user_id === id || friend.friend_id === id)
+    .map(friend =>
+        {
+            if (friend.user_id === id)
+            {
+                return friend.friend_id
+            }
+            else
+            {
+                return friend.user_id
+            }
+        })
+
+    let userFriends = this.state.users.filter(user => friendIds.includes(user.id))
+
+    this.setState({userFriends: userFriends})
+  }
+
+  setFriend = (friend) => {
+    this.setState({selectedFriend: friend}, () =>
+    {
+        return (APIManager.getLike("locations", friend)
+        .then(locations => this.setState({friendLocations: locations})))
+    }
+    )
+  }
+
 
 
   //Methods to be passed to components
@@ -47,6 +81,7 @@ class ApplicationViews extends Component {
         this.props.history.push(`/${name}`)
       })
   }
+
   deleteMessage = (name, id) => {
     console.log("inside delete item")
     let newObj = {}
@@ -63,19 +98,11 @@ class ApplicationViews extends Component {
         this.props.history.push(`/${name}`)
       })
   }
+
   updateItem = (name, editedObject) => {
-    let newObj = {}
     return APIManager.put(name, editedObject)
-      .then(() =>
-        APIManager.getAll(
-          `${name}?user_id=${+sessionStorage.getItem("activeUser")}`
-        )
-      )
-      .then(item => {
-        newObj[name] = item
-        this.setState(newObj)
-      })
-      .then(() => this.props.history.push(`/${name}`))
+    .then(() => APIManager.getLike("locations", +sessionStorage.getItem("activeUser")))
+    .then(userPlaces => this.setState({userLocations: userPlaces}))
   }
 
   updateMessage = (name, editedObject) => {
@@ -94,20 +121,11 @@ class ApplicationViews extends Component {
   }
 
   addItem = (name, item) => {
-    let newObj = {}
     APIManager.post(name, item)
-      .then(() =>
-        APIManager.getAll(
-          `${name}?user_id=${+sessionStorage.getItem("activeUser")}`
-        )
-      )
-      .then(items => {
-        newObj[name] = items
-        this.setState(newObj)
-      })
-      .then(() => this.props.history.push("/"))
-      .then(() => this.props.history.push(`/${name}`))
+    .then(() => APIManager.getLike("locations", +sessionStorage.getItem("activeUser")))
+    .then(userPlaces => this.setState({userLocations: userPlaces}))
   }
+
   addMessage = (name, item) => {
     let newObj = {}
     APIManager.post(name, item)
@@ -134,7 +152,7 @@ class ApplicationViews extends Component {
       .then(allLocations => (newState.locations = allLocations))
       .then(() => APIManager.getLike("locations", +sessionStorage.getItem("activeUser")))
       .then(userPlaces => (newState.userLocations = userPlaces))
-      .then(() => this.setState(newState))
+      .then(() => this.setState(newState, () => this.getFriends()))
   }
 
   // check session storage for value, return true or false
@@ -188,7 +206,15 @@ class ApplicationViews extends Component {
           exact
           path="/triangulate"
           render={props => {
-            return <MapPage users={this.state.users} locations={this.state.locations} userLocations={this.state.userLocations} friends={this.state.friends} {...props} />
+            return <MapPage users={this.state.users} locations={this.state.locations} setFriend={this.setFriend} getFriendlocations={this.getFriendlocations} userLocations={this.state.userLocations} userFriends={this.state.userFriends} friendLocations={this.state.friendLocations} {...props} />
+          }}
+        />
+
+        <Route
+          exact
+          path="/add"
+          render={props => {
+            return <Add users={this.state.users} updateItem={this.updateItem} addItem={this.addItem} userLocations={this.state.userLocations} userFriends={this.state.userFriends} {...props} />
           }}
         />
       </React.Fragment>

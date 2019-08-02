@@ -1,8 +1,8 @@
 {
   "locations": [
     {
-      "name": "Home",
-      "latitude": "36.1627",
+      "name": "Homec",
+      "latitude": "36.1625",
       "longitude": "-86.7816",
       "user_id": 1,
       "central": false,
@@ -14,7 +14,79 @@
       "longitude": "-82.5515",
       "user_id": 1,
       "central": false,
-      "id": 1
+      "id": 2
+    },
+    {
+      "name": "Home2",
+      "latitude": "35.5951",
+      "longitude": "-82.5515",
+      "user_id": 2,
+      "central": false,
+      "id": 3
+    },
+    {
+      "name": "Work2",
+      "latitude": "35.5951",
+      "longitude": "-82.5515",
+      "user_id": 2,
+      "central": false,
+      "id": 4
+    },
+    {
+      "name": "Home3",
+      "latitude": "35.5951",
+      "longitude": "-82.5515",
+      "user_id": 3,
+      "central": false,
+      "id": 5
+    },
+    {
+      "name": "Work3",
+      "latitude": "35.5951",
+      "longitude": "-82.5515",
+      "user_id": 3,
+      "central": false,
+      "id": 6
+    },
+    {
+      "name": "test",
+      "latitude": "47.3",
+      "longitude": "-121.2",
+      "central": false,
+      "user_id": 1,
+      "id": 7
+    },
+    {
+      "name": "new",
+      "latitude": "68.3",
+      "longitude": "121.2",
+      "central": false,
+      "user_id": 1,
+      "id": 8
+    },
+    {
+      "name": "test",
+      "latitude": "32.2",
+      "longitude": "83.2",
+      "central": false,
+      "user_id": 1,
+      "id": 9
+    },
+    {
+      "name": "test",
+      "latitude": "47.3",
+      "longitude": "179.1",
+      "central": false,
+      "user_id": 1,
+      "id": 10
+    },
+    {
+      "name": "a",
+      "latitude": "47.3",
+      "longitude": "121.1",
+      "central": false,
+      "user_id": 1,
+      "id": 11
     }
   ],
   "friends": [
@@ -22,11 +94,6 @@
       "id": 1,
       "user_id": 1,
       "friend_id": 2
-    },
-    {
-      "id": 3,
-      "user_id": 2,
-      "friend_id": 1
     },
     {
       "friend_id": 2,

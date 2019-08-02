@@ -1,0 +1,8 @@
+.add-locations {
+    display: flex;
+    flex-direction: row;
+}
+
+.list-form {
+    flex-direction: column;
+}
