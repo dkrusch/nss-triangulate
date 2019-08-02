@@ -19,7 +19,6 @@ class FriendLocations extends Component {
                     this.props.friendLocations
                     .map((location, i) =>
                     {
-                        console.log("location", location)
                         return <option key={`friend-location-${i}`} value={`${location.name}`}>{location.name}</option>
                     })
                 }

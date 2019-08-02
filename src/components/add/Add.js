@@ -57,7 +57,6 @@ class Add extends Component {
         display: "none"
       };
       //if there is an active user
-      console.log(this.props.userLocations)
       return (
         <React.Fragment>
           <div className="add-locations">
@@ -125,7 +124,7 @@ class Add extends Component {
                 </section>
             </div>
             <div className="list-form">
-                <AddFriendForm userFriends={this.props.userFriends}/>
+                <AddFriendForm users={this.props.users} addItem={this.props.addItem} strangers={this.props.strangers}/>
                 <section className="events">
                 {
                     // Sorts the events from the database by date, based on unix time

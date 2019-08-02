@@ -16,6 +16,7 @@ class ApplicationViews extends Component {
     userLocations: [],
     userFriends: [],
     friendLocations: [],
+    strangers: [],
     selectedFriend: ""
   }
 
@@ -36,7 +37,8 @@ class ApplicationViews extends Component {
 
     let userFriends = this.state.users.filter(user => friendIds.includes(user.id))
 
-    this.setState({userFriends: userFriends})
+    console.log(userFriends, this.state.strangers)
+    this.setState({userFriends: userFriends}, () => this.setStrangers())
   }
 
   setFriend = (friend) => {
@@ -48,25 +50,46 @@ class ApplicationViews extends Component {
     )
   }
 
+  setStrangers = () => {
+    let strangers = []
+    this.state.users.filter(user => user.id !== +sessionStorage.getItem("activeUser")).forEach(notme =>
+        {
+            let arentFriend = false
+            let checked = false
+            this.state.userFriends.forEach(friend =>
+                {
+                    if (notme.id !== friend.id)
+                    {
+                        arentFriend = true
+                    }
+                    if (notme.id === friend.id)
+                    {
+                        checked = true
+                    }
+                })
+                if (!checked && arentFriend)
+                {
+                    strangers.push(notme)
+                }
+        })
+    this.setState({strangers: strangers})
+  }
+
 
 
   //Methods to be passed to components
   likeItem = (name, word) => {
-    console.log("inside delete item")
     let newObj = {}
     return APIManager.getLike(name, word)
     .then(group => {
-      console.log(group)
       newObj["potentialFriends"] = group
       this.setState(newObj)
-      console.log(name, newObj, this.state)
       this.props.history.push(`/friends/search`)
     })
   }
 
 
   deleteItem = (name, id) => {
-    console.log("inside delete item")
     let newObj = {}
     return fetch(`http://localhost:5002/${name}/${id}`, {
       method: "DELETE"
@@ -77,13 +100,11 @@ class ApplicationViews extends Component {
       .then(group => {
         newObj[name] = group
         this.setState(newObj)
-        console.log(name, newObj, this.state)
         this.props.history.push(`/${name}`)
       })
   }
 
   deleteMessage = (name, id) => {
-    console.log("inside delete item")
     let newObj = {}
     return fetch(`http://localhost:5002/${name}/${id}`, {
       method: "DELETE"
@@ -94,7 +115,6 @@ class ApplicationViews extends Component {
       .then(group => {
         newObj[name] = group
         this.setState(newObj)
-        console.log(name, newObj, this.state)
         this.props.history.push(`/${name}`)
       })
   }
@@ -123,7 +143,7 @@ class ApplicationViews extends Component {
   addItem = (name, item) => {
     APIManager.post(name, item)
     .then(() => APIManager.getLike("locations", +sessionStorage.getItem("activeUser")))
-    .then(userPlaces => this.setState({userLocations: userPlaces}))
+    .then(userPlaces => this.setState({userLocations: userPlaces}, () => this.getFriends()))
   }
 
   addMessage = (name, item) => {
@@ -154,6 +174,7 @@ class ApplicationViews extends Component {
       .then(userPlaces => (newState.userLocations = userPlaces))
       .then(() => this.setState(newState, () => this.getFriends()))
   }
+
 
   // check session storage for value, return true or false
   isAuthenticated = () => {
@@ -214,7 +235,7 @@ class ApplicationViews extends Component {
           exact
           path="/add"
           render={props => {
-            return <Add users={this.state.users} updateItem={this.updateItem} addItem={this.addItem} userLocations={this.state.userLocations} userFriends={this.state.userFriends} {...props} />
+            return <Add users={this.state.users} strangers={this.state.strangers} updateItem={this.updateItem} addItem={this.addItem} userLocations={this.state.userLocations} userFriends={this.state.userFriends} {...props} />
           }}
         />
       </React.Fragment>

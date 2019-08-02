@@ -87,6 +87,14 @@
       "central": false,
       "user_id": 1,
       "id": 11
+    },
+    {
+      "name": "NewLocation",
+      "latitude": "36.11111",
+      "longitude": "-86.7816",
+      "central": false,
+      "user_id": 1,
+      "id": 12
     }
   ],
   "friends": [
@@ -96,7 +104,7 @@
       "friend_id": 2
     },
     {
-      "friend_id": 2,
+      "friend_id": 3,
       "user_id": 2,
       "id": 4
     },
