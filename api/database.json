@@ -50,22 +50,6 @@
     },
     {
       "name": "test",
-      "latitude": "47.3",
-      "longitude": "-121.2",
-      "central": false,
-      "user_id": 1,
-      "id": 7
-    },
-    {
-      "name": "new",
-      "latitude": "68.3",
-      "longitude": "121.2",
-      "central": false,
-      "user_id": 1,
-      "id": 8
-    },
-    {
-      "name": "test",
       "latitude": "32.2",
       "longitude": "83.2",
       "central": false,

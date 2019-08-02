@@ -10,6 +10,10 @@ class Add extends Component {
     friends: []
   }
 
+  deleteItem = (object) => {
+    this.props.deleteItem("locations", object.id)
+  }
+
   handleFieldChange = event => {
     const stateToChange = {};
     let key = event.target.id.split("-")[0]
@@ -81,6 +85,14 @@ class Add extends Component {
                                             id={`edit-button-${location.id}`}
                                             >
                                             Edit
+                                            </button>
+                                            <button
+                                            type="submit"
+                                            onClick={() => this.deleteItem(location)}
+                                            className="btn btn-primary"
+                                            id={`delete-button-${location.id}`}
+                                            >
+                                            Delete
                                             </button>
                                         </div>
                                     </div>

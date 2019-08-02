@@ -96,18 +96,10 @@ class ApplicationViews extends Component {
 
 
   deleteItem = (name, id) => {
-    let newObj = {}
-    return fetch(`http://localhost:5002/${name}/${id}`, {
-      method: "DELETE"
-    })
-      .then(e => e.json())
-      .then(() => APIManager.getAll(`${name}?user_id=${+sessionStorage.getItem("activeUser")}`
-      ))
-      .then(group => {
-        newObj[name] = group
-        this.setState(newObj)
-        this.props.history.push(`/${name}`)
-      })
+    const newObject = {}
+    APIManager.delete(name, id)
+    .then(() => APIManager.getLike("locations", +sessionStorage.getItem("activeUser")))
+    .then(userPlaces => this.setState({userLocations: userPlaces}, () => this.updateFriends()))
   }
 
   deleteMessage = (name, id) => {
@@ -241,7 +233,7 @@ class ApplicationViews extends Component {
           exact
           path="/add"
           render={props => {
-            return <Add users={this.state.users} strangers={this.state.strangers} updateItem={this.updateItem} addItem={this.addItem} userLocations={this.state.userLocations} userFriends={this.state.userFriends} {...props} />
+            return <Add users={this.state.users} strangers={this.state.strangers} updateItem={this.updateItem} addItem={this.addItem} deleteItem={this.deleteItem} userLocations={this.state.userLocations} userFriends={this.state.userFriends} {...props} />
           }}
         />
       </React.Fragment>
