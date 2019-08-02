@@ -20,6 +20,11 @@ class ApplicationViews extends Component {
     selectedFriend: ""
   }
 
+  updateFriends = () => {
+    APIManager.getAll("friends")
+    .then(allFriends => this.setState({friends: allFriends}, () => this.getFriends()))
+  }
+
   getFriends = () => {
     const id = +sessionStorage.getItem("activeUser")
     const friendIds = this.state.friends.filter(friend => friend.user_id === id || friend.friend_id === id)
@@ -52,6 +57,7 @@ class ApplicationViews extends Component {
 
   setStrangers = () => {
     let strangers = []
+    console.log("EXPLAIN", this.state.userFriends)
     this.state.users.filter(user => user.id !== +sessionStorage.getItem("activeUser")).forEach(notme =>
         {
             let arentFriend = false
@@ -143,7 +149,7 @@ class ApplicationViews extends Component {
   addItem = (name, item) => {
     APIManager.post(name, item)
     .then(() => APIManager.getLike("locations", +sessionStorage.getItem("activeUser")))
-    .then(userPlaces => this.setState({userLocations: userPlaces}, () => this.getFriends()))
+    .then(userPlaces => this.setState({userLocations: userPlaces}, () => this.updateFriends()))
   }
 
   addMessage = (name, item) => {

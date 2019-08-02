@@ -57,6 +57,7 @@ class Add extends Component {
         display: "none"
       };
       //if there is an active user
+      console.log("rerender?")
       return (
         <React.Fragment>
           <div className="add-locations">
@@ -124,6 +125,7 @@ class Add extends Component {
                 </section>
             </div>
             <div className="list-form">
+                {console.log(this.props.userFriends)}
                 <AddFriendForm users={this.props.users} addItem={this.props.addItem} strangers={this.props.strangers}/>
                 <section className="events">
                 {
