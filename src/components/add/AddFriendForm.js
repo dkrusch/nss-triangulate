@@ -8,7 +8,7 @@ class AddFriendForm extends Component {
   };
 
   clearFields = () => {
-    document.getElementById("text").value = ""
+    document.querySelector("#stranger-choice").value = ""
   }
 
   addFriend = (event) =>
@@ -22,6 +22,7 @@ class AddFriendForm extends Component {
         friend_id: friend.id
     }
     this.props.addItem("friends", friendObj)
+    this.clearFields()
   }
 
 
