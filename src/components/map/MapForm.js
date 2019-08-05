@@ -14,7 +14,8 @@ class MapForm extends Component {
 
   clearFields = () =>
   {
-
+    const inputs = document.querySelectorAll(".form-control")
+    Array.from(inputs).forEach(input => input.value = "")
   }
 
   calculateCenter = (event) => {
@@ -80,6 +81,76 @@ class MapForm extends Component {
     // User must start with the first set of inputs and submit that location
   };
 
+  disableClearButtons = coordinates => {
+    if (coordinates.length === 0)
+    {
+      console.log("here i am", coordinates)
+      return <div className="clear-buttons"><button
+      type="button"
+      id="clear"
+      onClick={this.props.clearMarkers}
+      disabled
+      className="btn btn-primary"
+      >
+        Clear
+      </button>
+      <button
+      type="button"
+      id="clear"
+      onClick={this.props.clearAllMarkers}
+      disabled
+      className="btn btn-primary"
+      >
+        Clear All
+      </button>
+      </div>
+    }
+    else
+    {
+      console.log("here i amnt", coordinates)
+      return <div className="clear-buttons"><button
+      type="button"
+      id="clear"
+      onClick={this.props.clearMarkers}
+      className="btn btn-primary"
+      >
+        Clear
+      </button>
+      <button
+      type="button"
+      id="clear"
+      onClick={this.props.clearAllMarkers}
+      className="btn btn-primary"
+      >
+        Clear All
+      </button>
+      </div>
+    }
+  }
+
+  disableCalculate = coordinates => {
+    if (coordinates.length > 1)
+    {
+      return <button
+      type="submit"
+      onClick={this.calculateCenter}
+      className="btn btn-primary"
+      >
+        Calculate
+      </button>
+    }
+    else
+    {
+      return <button
+        type="submit"
+        onClick={this.calculateCenter}
+        disabled
+        className="btn btn-primary"
+      >
+        Calculate
+      </button>
+    }
+  }
 
   // Renders an input for name date and location
   render() {
@@ -166,13 +237,10 @@ class MapForm extends Component {
             </button>
           </div>
           <div className="submit-group">
-            <button
-              type="submit"
-              onClick={this.calculateCenter}
-              className="btn btn-primary"
-            >
-              Calculate
-            </button>
+            {this.disableCalculate(this.props.coordinates)}
+          </div>
+          <div className="clear-group">
+            {this.disableClearButtons(this.props.coordinates)}
           </div>
         </form>
       </React.Fragment>

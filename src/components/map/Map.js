@@ -47,6 +47,29 @@ class MapPage extends Component {
       })
     }
 
+    clearMarkers = () => {
+      const coords = this.state.coordinates
+      let lastIndex = coords.length - 1
+      console.log("coords", coords)
+      console.log("inde", lastIndex)
+      if (coords !== [] && coords[lastIndex].style === "normal")
+      {
+          console.log(coords[lastIndex])
+          coords.pop()
+          this.setState({coordinates: coords})
+      }
+      else
+      {
+        coords.pop()
+        coords.pop()
+        this.setState({coordinates: coords})
+      }
+    }
+
+    clearAllMarkers = () => {
+      this.setState({coordinates: []})
+    }
+
     addLocation = (latlong) => {
         console.log("latlong", latlong)
         console.log("state", this.state.coordinates)
@@ -131,7 +154,7 @@ class MapPage extends Component {
         return (
             <React.Fragment>
                 <section>
-                    <MapForm addLocation={this.addLocation} setFriend={this.props.setFriend} getFriendLocations={this.props.getFriendLocations} friendLocations={this.props.friendLocations} userLocations={this.props.userLocations} userFriends={this.props.userFriends} locations={this.props.locations} calculateCenter={this.calculateCenter}/>
+                    <MapForm addLocation={this.addLocation} clearMarkers={this.clearMarkers} clearAllMarkers={this.clearAllMarkers} setFriend={this.props.setFriend} getFriendLocations={this.props.getFriendLocations} friendLocations={this.props.friendLocations} userLocations={this.props.userLocations} userFriends={this.props.userFriends} locations={this.props.locations} calculateCenter={this.calculateCenter} coordinates={this.state.coordinates}/>
                     <div className="MapContainer">
                         <Map
                         google={this.props.google}
