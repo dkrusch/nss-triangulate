@@ -27,6 +27,7 @@ class ApplicationViews extends Component {
 
   getFriends = () => {
     const id = +sessionStorage.getItem("activeUser")
+
     const friendIds = this.state.friends.filter(friend => friend.user_id === id || friend.friend_id === id)
     .map(friend =>
         {
@@ -40,9 +41,32 @@ class ApplicationViews extends Component {
             }
         })
 
-    let userFriends = this.state.users.filter(user => friendIds.includes(user.id))
+    const joinIds = this.state.friends.filter(friend => friend.user_id === id || friend.friend_id === id)
+    .map(friend =>
+        {
+          if (friend.user_id === id)
+          {
+              return [friend.friend_id, friend.id]
+          }
+          else
+          {
+              return [friend.user_id, friend.id]
+          }
+        })
 
-    console.log(userFriends, this.state.strangers)
+    const userFriends = this.state.users.filter(user => friendIds.includes(user.id))
+
+    for (let i = 0; i < joinIds.length; i++)
+    {
+      for (let y = 0; y < joinIds.length; y++)
+      {
+        if (userFriends[i].id === joinIds[y][0])
+        {
+          userFriends[i].join_id = joinIds[y][1]
+        }
+      }
+    }
+
     this.setState({userFriends: userFriends}, () => this.setStrangers())
   }
 
@@ -57,26 +81,33 @@ class ApplicationViews extends Component {
 
   setStrangers = () => {
     let strangers = []
-    console.log("EXPLAIN", this.state.userFriends)
+    console.log("EXPLAIN", this.state.userFriends.length)
     this.state.users.filter(user => user.id !== +sessionStorage.getItem("activeUser")).forEach(notme =>
         {
             let arentFriend = false
             let checked = false
-            this.state.userFriends.forEach(friend =>
-                {
-                    if (notme.id !== friend.id)
-                    {
-                        arentFriend = true
-                    }
-                    if (notme.id === friend.id)
-                    {
-                        checked = true
-                    }
-                })
-                if (!checked && arentFriend)
-                {
-                    strangers.push(notme)
-                }
+            if (this.state.userFriends.length !== 0)
+            {
+              this.state.userFriends.forEach(friend =>
+                  {
+                      if (notme.id !== friend.id)
+                      {
+                          arentFriend = true
+                      }
+                      if (notme.id === friend.id)
+                      {
+                          checked = true
+                      }
+                  })
+                  if (!checked && arentFriend)
+                  {
+                      strangers.push(notme)
+                  }
+            }
+            else
+            {
+              strangers.push(notme)
+            }
         })
     this.setState({strangers: strangers})
   }

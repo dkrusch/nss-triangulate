@@ -10,8 +10,17 @@ class Add extends Component {
     friends: []
   }
 
-  deleteItem = (object) => {
-    this.props.deleteItem("locations", object.id)
+  deleteItem = (event, id) => {
+    let type = event.target.id.split("-")[1]
+    console.log(id)
+    if (type === "location")
+    {
+      this.props.deleteItem("locations", id)
+    }
+    else
+    {
+      this.props.deleteItem("friends", id)
+    }
   }
 
   handleFieldChange = event => {
@@ -61,7 +70,6 @@ class Add extends Component {
         display: "none"
       };
       //if there is an active user
-      console.log("rerender?")
       return (
         <React.Fragment>
           <div className="add-locations">
@@ -88,9 +96,9 @@ class Add extends Component {
                                             </button>
                                             <button
                                             type="submit"
-                                            onClick={() => this.deleteItem(location)}
+                                            onClick={(e) => this.deleteItem(e, location.id)}
                                             className="btn btn-primary"
-                                            id={`delete-button-${location.id}`}
+                                            id={`delete-location-${location.id}`}
                                             >
                                             Delete
                                             </button>
@@ -142,7 +150,7 @@ class Add extends Component {
                 <section className="events">
                 {
                     // Sorts the events from the database by date, based on unix time
-                    this.props.userFriends.map((friend, i) =>
+                    this.props.userFriends.map((friend) =>
                     {
                             return <div key={friend.id} className="card card--friend" id="soonest">
                                     <div className="card-body">
@@ -151,6 +159,14 @@ class Add extends Component {
                                             <h6>{friend.email}</h6>
                                         </div>
                                     </div>
+                                    <button
+                                            type="submit"
+                                            onClick={(e) => this.deleteItem(e, friend.join_id)}
+                                            className="btn btn-primary"
+                                            id={`delete-user-${friend.id}`}
+                                            >
+                                            Delete
+                                    </button>
                                 </div>
                     })
                 }
