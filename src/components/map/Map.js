@@ -66,8 +66,16 @@ class MapPage extends Component {
       }
     }
 
-    clearAllMarkers = () => {
-      this.setState({coordinates: []})
+    clearAllMarkers = (submit, location) => {
+      console.log("you are in clear all")
+      if (submit)
+      {
+        this.setState({coordinates: []}, () => this.addLocation(location))
+      }
+      else
+      {
+        this.setState({coordinates: []})
+      }
     }
 
     addLocation = (latlong) => {

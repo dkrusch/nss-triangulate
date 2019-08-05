@@ -40,9 +40,23 @@ class MapForm extends Component {
 
     if (latRegex.exec(this.state.latitude) && lngRegex.exec(this.state.longitude))
     {
-        console.log(this.state.longitude)
-        this.props.addLocation(this.state)
-        this.clearFields()
+        const coords = this.props.coordinates
+        console.log(coords)
+        const lastIndex = coords.length - 1
+        if (coords.length !== 0 && coords[lastIndex].style === "center")
+        {
+          const submit = true
+          console.log(coords)
+          console.log("helloooooooooo", coords[lastIndex].style)
+          this.props.clearAllMarkers(submit, this.state)
+          this.clearFields()
+        }
+        else
+        {
+          console.log(this.state.longitude)
+          this.props.addLocation(this.state)
+          this.clearFields()
+        }
     }
     else
     {
@@ -58,10 +72,29 @@ class MapForm extends Component {
     let dropdown = document.querySelector(`.${id}-location`)
     let selectedLocation = this.props.locations.find(location => location.name === dropdown.value)
 
-    // Sets the state with the values from the dropdowns, waits, then sends the state into the passed function
-    this.setState(
+    const coords = this.props.coordinates
+    console.log(coords)
+    const lastIndex = coords.length - 1
+    if (coords.length !== 0 && coords[lastIndex].style === "center")
+    {
+      const submit = true
+      console.log(coords)
+      console.log("helloooooooooo", coords[lastIndex].style)
+      // Sets the state with the values from the dropdowns, waits, then sends the state into the passed function
+      this.setState(
+        {latitude: +selectedLocation.latitude, longitude: +selectedLocation.longitude},
+        () => this.props.clearAllMarkers(submit, this.state))
+    }
+    else
+    {
+      console.log(this.state.longitude)
+      this.setState(
         {latitude: +selectedLocation.latitude, longitude: +selectedLocation.longitude},
         () => this.props.addLocation(this.state))
+    }
+
+
+
   };
 
   generateFriendLocations = event => {
