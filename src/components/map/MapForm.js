@@ -70,31 +70,34 @@ class MapForm extends Component {
     // the submit button id
     let id = event.target.id.split("-")[0]
     let dropdown = document.querySelector(`.${id}-location`)
-    let selectedLocation = this.props.locations.find(location => location.name === dropdown.value)
-
-    const coords = this.props.coordinates
-    console.log(coords)
-    const lastIndex = coords.length - 1
-    if (coords.length !== 0 && coords[lastIndex].style === "center")
+    const index = dropdown.options[dropdown.selectedIndex]
+    console.log("INDEX", index.value)
+    if (+index.value !== 0)
     {
-      const submit = true
-      console.log(coords)
-      console.log("helloooooooooo", coords[lastIndex].style)
-      // Sets the state with the values from the dropdowns, waits, then sends the state into the passed function
-      this.setState(
-        {latitude: +selectedLocation.latitude, longitude: +selectedLocation.longitude},
-        () => this.props.clearAllMarkers(submit, this.state))
+      let selectedLocation = this.props.locations.find(location => location.name === dropdown.value)
+
+      const coords = this.props.coordinates
+      const lastIndex = coords.length - 1
+      if (coords.length !== 0 && coords[lastIndex].style === "center")
+      {
+        const submit = true
+
+        // Sets the state with the values from the dropdowns, waits, then sends the state into the passed function
+        this.setState(
+          {latitude: +selectedLocation.latitude, longitude: +selectedLocation.longitude},
+          () => this.props.clearAllMarkers(submit, this.state))
+      }
+      else
+      {
+        this.setState(
+          {latitude: +selectedLocation.latitude, longitude: +selectedLocation.longitude},
+          () => this.props.addLocation(this.state))
+      }
     }
     else
     {
-      console.log(this.state.longitude)
-      this.setState(
-        {latitude: +selectedLocation.latitude, longitude: +selectedLocation.longitude},
-        () => this.props.addLocation(this.state))
+      alert("Sorry, that is not a valid location.")
     }
-
-
-
   };
 
   generateFriendLocations = event => {
@@ -206,6 +209,7 @@ class MapForm extends Component {
           <div className="form-group" style={dontshow} id="user-form">
             <label htmlFor="name">Saved Locations:</label>
             <select className="user-location">
+                <option key={`location-option-0`} value="0" defaultValue>Pick a location...</option>
                 {this.props.userLocations.map((location, i) =>
                     {
                         return <option key={`user-location-${i}`} value={`${location.name}`}>{location.name}</option>
@@ -224,7 +228,7 @@ class MapForm extends Component {
           <div className="form-group" style={dontshow} id="friend-form">
             <label htmlFor="name">Friends:</label>
             <select className="friend-option" onChange={this.generateFriendLocations}>
-                <option key={`friend-option-0`} value="" defaultValue>Pick a friend...</option>
+                <option key={`friend-option-0`} value="0" defaultValue>Pick a friend...</option>
                 {this.props.userFriends.map((friend, i) =>
                     {
                         return <option key={`friend-option-${i+1}`} value={`friend-${friend.id}`} id={`friend-${friend.id}`}>{friend.username}</option>
