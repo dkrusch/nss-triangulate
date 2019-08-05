@@ -29,7 +29,6 @@ class AddLocationForm extends Component {
 
     if (latRegex.exec(this.state.latitude) && lngRegex.exec(this.state.longitude))
     {
-        console.log(this.state.longitude)
         this.props.addItem("locations", this.state)
         this.clearFields()
     }

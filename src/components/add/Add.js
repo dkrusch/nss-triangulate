@@ -10,6 +10,19 @@ class Add extends Component {
     friends: []
   }
 
+  deleteItem = (event, id) => {
+    let type = event.target.id.split("-")[1]
+    console.log(id)
+    if (type === "location")
+    {
+      this.props.deleteItem("locations", id)
+    }
+    else
+    {
+      this.props.deleteItem("friends", id)
+    }
+  }
+
   handleFieldChange = event => {
     const stateToChange = {};
     let key = event.target.id.split("-")[0]
@@ -57,7 +70,6 @@ class Add extends Component {
         display: "none"
       };
       //if there is an active user
-      console.log(this.props.userLocations)
       return (
         <React.Fragment>
           <div className="add-locations">
@@ -81,6 +93,14 @@ class Add extends Component {
                                             id={`edit-button-${location.id}`}
                                             >
                                             Edit
+                                            </button>
+                                            <button
+                                            type="submit"
+                                            onClick={(e) => this.deleteItem(e, location.id)}
+                                            className="btn btn-primary"
+                                            id={`delete-location-${location.id}`}
+                                            >
+                                            Delete
                                             </button>
                                         </div>
                                     </div>
@@ -125,11 +145,12 @@ class Add extends Component {
                 </section>
             </div>
             <div className="list-form">
-                <AddFriendForm userFriends={this.props.userFriends}/>
+                {console.log(this.props.userFriends)}
+                <AddFriendForm users={this.props.users} addItem={this.props.addItem} strangers={this.props.strangers}/>
                 <section className="events">
                 {
                     // Sorts the events from the database by date, based on unix time
-                    this.props.userFriends.map((friend, i) =>
+                    this.props.userFriends.map((friend) =>
                     {
                             return <div key={friend.id} className="card card--friend" id="soonest">
                                     <div className="card-body">
@@ -138,6 +159,14 @@ class Add extends Component {
                                             <h6>{friend.email}</h6>
                                         </div>
                                     </div>
+                                    <button
+                                            type="submit"
+                                            onClick={(e) => this.deleteItem(e, friend.join_id)}
+                                            className="btn btn-primary"
+                                            id={`delete-user-${friend.id}`}
+                                            >
+                                            Delete
+                                    </button>
                                 </div>
                     })
                 }

@@ -8,8 +8,23 @@ class AddFriendForm extends Component {
   };
 
   clearFields = () => {
-    document.getElementById("text").value = ""
+    document.querySelector("#stranger-choice").value = ""
   }
+
+  addFriend = (event) =>
+  {
+    event.preventDefault()
+    let dropdown = document.querySelector("#stranger-choice")
+    let friend = this.props.users.find(user => {
+        return user.username === dropdown.value})
+    let friendObj = {
+        user_id: +sessionStorage.getItem("activeUser"),
+        friend_id: friend.id
+    }
+    this.props.addItem("friends", friendObj)
+    this.clearFields()
+  }
+
 
   checkFields = (event) => {
     if (
@@ -18,7 +33,6 @@ class AddFriendForm extends Component {
       window.alert("All fields must be filled out");
     } else {
       event.preventDefault()
-      console.log(this.state.text)
       this.props.likeItem("users", this.state.text)
       this.clearFields()
     }
@@ -35,24 +49,21 @@ class AddFriendForm extends Component {
     return (
       <React.Fragment>
         <form className="articleForm">
-          <div className="form-group">
-            <label htmlFor="text">Search For A Friend</label>
-            <input
-              type="text"
-              autoFocus
-              required
-              className="form-control"
-              onChange={this.handleFieldChange}
-              id="text"
-            />
+            <label for="stranger-choice">Search for a friend:</label>
+            <input list="strangers" id="stranger-choice" name="friend-search" />
+            <datalist id="strangers">
+                {
+                    this.props.strangers.map((stranger) =>
+                    <option key={`stranger-${stranger.id}`} value={stranger.username} />
+                )}
+            </datalist>
             <button
-              type="submit"
-              onClick={this.checkFields}
-              className="btn btn-primary"
+                type="submit"
+                onClick={this.addFriend}
+                className="btn btn-primary"
             >
-              Submit
+                Submit
             </button>
-          </div>
         </form>
       </React.Fragment>
     )

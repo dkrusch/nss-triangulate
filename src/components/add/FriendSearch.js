@@ -13,7 +13,6 @@ export default class FriendSearch extends Component {
                 // and won't display them if they search for theirself
                 this.props.users.map(friend =>
                     {
-                        console.log(!friend.id === +sessionStorage.getItem("activeUser"))
                         if (!(friend.id === +sessionStorage.getItem("activeUser")))
                         {
                             return <div key={friend.id} className="card card--friend">

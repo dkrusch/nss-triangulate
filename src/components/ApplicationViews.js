@@ -16,11 +16,18 @@ class ApplicationViews extends Component {
     userLocations: [],
     userFriends: [],
     friendLocations: [],
+    strangers: [],
     selectedFriend: ""
+  }
+
+  updateFriends = () => {
+    APIManager.getAll("friends")
+    .then(allFriends => this.setState({friends: allFriends}, () => this.getFriends()))
   }
 
   getFriends = () => {
     const id = +sessionStorage.getItem("activeUser")
+
     const friendIds = this.state.friends.filter(friend => friend.user_id === id || friend.friend_id === id)
     .map(friend =>
         {
@@ -34,9 +41,33 @@ class ApplicationViews extends Component {
             }
         })
 
-    let userFriends = this.state.users.filter(user => friendIds.includes(user.id))
+    const joinIds = this.state.friends.filter(friend => friend.user_id === id || friend.friend_id === id)
+    .map(friend =>
+        {
+          if (friend.user_id === id)
+          {
+              return [friend.friend_id, friend.id]
+          }
+          else
+          {
+              return [friend.user_id, friend.id]
+          }
+        })
 
-    this.setState({userFriends: userFriends})
+    const userFriends = this.state.users.filter(user => friendIds.includes(user.id))
+
+    for (let i = 0; i < joinIds.length; i++)
+    {
+      for (let y = 0; y < joinIds.length; y++)
+      {
+        if (userFriends[i].id === joinIds[y][0])
+        {
+          userFriends[i].join_id = joinIds[y][1]
+        }
+      }
+    }
+
+    this.setState({userFriends: userFriends}, () => this.setStrangers())
   }
 
   setFriend = (friend) => {
@@ -48,42 +79,61 @@ class ApplicationViews extends Component {
     )
   }
 
+  setStrangers = () => {
+    let strangers = []
+    console.log("EXPLAIN", this.state.userFriends.length)
+    this.state.users.filter(user => user.id !== +sessionStorage.getItem("activeUser")).forEach(notme =>
+        {
+            let arentFriend = false
+            let checked = false
+            if (this.state.userFriends.length !== 0)
+            {
+              this.state.userFriends.forEach(friend =>
+                  {
+                      if (notme.id !== friend.id)
+                      {
+                          arentFriend = true
+                      }
+                      if (notme.id === friend.id)
+                      {
+                          checked = true
+                      }
+                  })
+                  if (!checked && arentFriend)
+                  {
+                      strangers.push(notme)
+                  }
+            }
+            else
+            {
+              strangers.push(notme)
+            }
+        })
+    this.setState({strangers: strangers})
+  }
+
 
 
   //Methods to be passed to components
   likeItem = (name, word) => {
-    console.log("inside delete item")
     let newObj = {}
     return APIManager.getLike(name, word)
     .then(group => {
-      console.log(group)
       newObj["potentialFriends"] = group
       this.setState(newObj)
-      console.log(name, newObj, this.state)
       this.props.history.push(`/friends/search`)
     })
   }
 
 
   deleteItem = (name, id) => {
-    console.log("inside delete item")
-    let newObj = {}
-    return fetch(`http://localhost:5002/${name}/${id}`, {
-      method: "DELETE"
-    })
-      .then(e => e.json())
-      .then(() => APIManager.getAll(`${name}?user_id=${+sessionStorage.getItem("activeUser")}`
-      ))
-      .then(group => {
-        newObj[name] = group
-        this.setState(newObj)
-        console.log(name, newObj, this.state)
-        this.props.history.push(`/${name}`)
-      })
+    const newObject = {}
+    APIManager.delete(name, id)
+    .then(() => APIManager.getLike("locations", +sessionStorage.getItem("activeUser")))
+    .then(userPlaces => this.setState({userLocations: userPlaces}, () => this.updateFriends()))
   }
 
   deleteMessage = (name, id) => {
-    console.log("inside delete item")
     let newObj = {}
     return fetch(`http://localhost:5002/${name}/${id}`, {
       method: "DELETE"
@@ -94,7 +144,6 @@ class ApplicationViews extends Component {
       .then(group => {
         newObj[name] = group
         this.setState(newObj)
-        console.log(name, newObj, this.state)
         this.props.history.push(`/${name}`)
       })
   }
@@ -123,7 +172,7 @@ class ApplicationViews extends Component {
   addItem = (name, item) => {
     APIManager.post(name, item)
     .then(() => APIManager.getLike("locations", +sessionStorage.getItem("activeUser")))
-    .then(userPlaces => this.setState({userLocations: userPlaces}))
+    .then(userPlaces => this.setState({userLocations: userPlaces}, () => this.updateFriends()))
   }
 
   addMessage = (name, item) => {
@@ -154,6 +203,7 @@ class ApplicationViews extends Component {
       .then(userPlaces => (newState.userLocations = userPlaces))
       .then(() => this.setState(newState, () => this.getFriends()))
   }
+
 
   // check session storage for value, return true or false
   isAuthenticated = () => {
@@ -214,7 +264,7 @@ class ApplicationViews extends Component {
           exact
           path="/add"
           render={props => {
-            return <Add users={this.state.users} updateItem={this.updateItem} addItem={this.addItem} userLocations={this.state.userLocations} userFriends={this.state.userFriends} {...props} />
+            return <Add users={this.state.users} strangers={this.state.strangers} updateItem={this.updateItem} addItem={this.addItem} deleteItem={this.deleteItem} userLocations={this.state.userLocations} userFriends={this.state.userFriends} {...props} />
           }}
         />
       </React.Fragment>
