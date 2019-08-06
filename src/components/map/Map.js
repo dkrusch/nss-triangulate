@@ -11,10 +11,54 @@ class MapPage extends Component {
     state = {
         coordinates: [],
         showingInfoWindow: false,  //Hides or the shows the infoWindow
-        center: {lat: 47.444, lng: -122.176},          //Shows the active marker upon click
+        center: {lat: 36.1627, lng: -86.7816},          //Shows the active marker upon click
         selectedPlace: {},
         bounds: {}
       }
+
+    checkCenter = (mapStyles, bounds) => {
+      if (this.state.coordinates.length === 0)
+      {
+        console.log("DONT BE IN HERE IT IS BAD TO BE IN HERE")
+        const center = {lat: 36.1627, lng: -86.7816}
+        return <Map
+        google={this.props.google}
+        zoom={8}
+        style={mapStyles}
+        initialCenter={center}
+        >
+        {this.displayMarkers()}
+        </Map>
+      }
+      else if (this.state.coordinates.length === 1)
+      {
+        console.log("the coordniate", this.state.coordinates)
+        console.log("the center", this.state.center)
+        const coordinate = this.state.coordinates[0]
+        const center = {lat: coordinate.latitude, lng: coordinate.longitude}
+        console.log(center)
+        return <Map
+        google={this.props.google}
+        zoom={8}
+        style={mapStyles}
+        center={center}
+        >
+        {this.displayMarkers()}
+        </Map>
+      }
+      else
+      {
+        return <Map
+        bounds={bounds}
+        google={this.props.google}
+        zoom={8}
+        style={mapStyles}
+        center={this.state.center}
+        >
+        {this.displayMarkers()}
+        </Map>
+      }
+    }
 
     degrees = (radians) =>
     {
@@ -81,9 +125,18 @@ class MapPage extends Component {
     addLocation = (latlong) => {
         console.log("latlong", latlong)
         console.log("state", this.state.coordinates)
+        let coordLength = this.state.coordinates.length
         let newCoords = [...this.state.coordinates]
         console.log("updated", newCoords)
-        this.setState({coordinates: newCoords.concat(latlong)})
+        if (coordLength === 0)
+        {
+          let newCenter = newCoords.concat(latlong)
+          this.setState({center: newCenter}, () => this.setState({coordinates: newCenter}))
+        }
+        else
+        {
+          this.setState({coordinates: newCoords.concat(latlong)})
+        }
     }
 
     // getLocation = () =>
@@ -158,20 +211,25 @@ class MapPage extends Component {
             height: '66.4%',
           }
 
-        console.log("what is key", process.env.REACT_APP_GOOGLE_MAP_KEY)
+        const bounds = new window.google.maps.LatLngBounds();
+
+        if (this.state.coordinates.length > 1)
+        {
+          this.state.coordinates.map(coordinate => {
+              const latitude = coordinate.latitude
+              const longitude = coordinate.longitude
+              const latLng = new window.google.maps.LatLng(latitude, longitude);
+              bounds.extend(latLng);
+              return latLng;
+          })
+        }
+
         return (
             <React.Fragment>
                 <section>
                     <MapForm addLocation={this.addLocation} clearMarkers={this.clearMarkers} clearAllMarkers={this.clearAllMarkers} setFriend={this.props.setFriend} getFriendLocations={this.props.getFriendLocations} friendLocations={this.props.friendLocations} userLocations={this.props.userLocations} userFriends={this.props.userFriends} locations={this.props.locations} calculateCenter={this.calculateCenter} coordinates={this.state.coordinates}/>
                     <div className="MapContainer">
-                        <Map
-                        google={this.props.google}
-                        zoom={8}
-                        style={mapStyles}
-                        initialCenter={this.state.center}
-                        >
-                        {this.displayMarkers()}
-                        </Map>
+                      {this.checkCenter(mapStyles, bounds)}
                     </div>
                 </section>
             </React.Fragment>
