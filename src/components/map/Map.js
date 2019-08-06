@@ -11,10 +11,53 @@ class MapPage extends Component {
     state = {
         coordinates: [],
         showingInfoWindow: false,  //Hides or the shows the infoWindow
-        center: {lat: 47.444, lng: -122.176},          //Shows the active marker upon click
+        center: {lat: 36.1627, lng: -86.7816},          //Shows the active marker upon click
         selectedPlace: {},
         bounds: {}
       }
+
+    checkCenter = (mapStyles, bounds) => {
+      if (this.state.coordinates.length === 0)
+      {
+        console.log("DONT BE IN HERE IT IS BAD TO BE IN HERE")
+        const center = {lat: 36.1627, lng: -86.7816}
+        return <Map
+        center={center}
+        bounds={this.state.bounds}
+        google={this.props.google}
+        zoom={8}
+        style={mapStyles}
+        >
+        {this.displayMarkers()}
+        </Map>
+      }
+      else if (this.state.coordinates.length === 1)
+      {
+        console.log("the coordniate", this.state.coordinates)
+        console.log("the center", this.state.center)
+        return <Map
+        bounds={this.state.bounds}
+        google={this.props.google}
+        zoom={8}
+        style={mapStyles}
+        center={this.state.center}
+        >
+        {this.displayMarkers()}
+        </Map>
+      }
+      else
+      {
+        console.log(this.state.bounds)
+        return <Map
+        bounds={this.state.bounds}
+        google={this.props.google}
+        zoom={8}
+        style={mapStyles}
+        >
+        {this.displayMarkers()}
+        </Map>
+      }
+    }
 
     degrees = (radians) =>
     {
@@ -47,12 +90,60 @@ class MapPage extends Component {
       })
     }
 
+    clearMarkers = () => {
+      const coords = [...this.state.coordinates]
+      let lastIndex = coords.length - 1
+      console.log("coords", coords)
+      console.log("inde", lastIndex)
+      if (coords !== [] && coords[lastIndex].style === "normal")
+      {
+          console.log(coords[lastIndex])
+          coords.pop()
+          this.setState({coordinates: coords})
+      }
+      else
+      {
+        coords.pop()
+        coords.pop()
+        this.setState({coordinates: coords})
+      }
+    }
+
+    clearAllMarkers = () => {
+        this.setState({coordinates: []})
+    }
+
+    clearAllMarkersSubmit = (submit, location) => {
+        this.setState({coordinates: []}, () => this.addLocation(location))
+    }
+
     addLocation = (latlong) => {
         console.log("latlong", latlong)
         console.log("state", this.state.coordinates)
+        let coordLength = this.state.coordinates.length
         let newCoords = [...this.state.coordinates]
         console.log("updated", newCoords)
-        this.setState({coordinates: newCoords.concat(latlong)})
+        if (coordLength === 0)
+        {
+          let newCenter = newCoords.concat(latlong)
+          const center = {lat: newCenter[0].latitude, lng: newCenter[0].longitude}
+          this.setState({center: center, coordinates: newCenter})
+        }
+        else
+        {
+          const bounds = new window.google.maps.LatLngBounds()
+          let newerCoords = newCoords.concat(latlong)
+          console.log("HELLO", newerCoords)
+          newerCoords.forEach(coordinate => {
+            console.log("bound loop", coordinate)
+            console.log("bounds?", bounds)
+            const latitude = coordinate.latitude
+            const longitude = coordinate.longitude
+            const latLng = new window.google.maps.LatLng(latitude, longitude);
+            bounds.extend(latLng);
+          })
+          this.setState({bounds: bounds}, () => this.setState({coordinates: newCoords.concat(latlong)}))
+        }
     }
 
     // getLocation = () =>
@@ -127,20 +218,24 @@ class MapPage extends Component {
             height: '66.4%',
           }
 
-        console.log("what is key", process.env.REACT_APP_GOOGLE_MAP_KEY)
+        // const bounds = new window.google.maps.LatLngBounds();
+
+        // if (this.state.coordinates.length > 1)
+        // {
+        //   this.state.coordinates.forEach(coordinate => {
+        //       const latitude = coordinate.latitude
+        //       const longitude = coordinate.longitude
+        //       const latLng = new window.google.maps.LatLng(latitude, longitude);
+        //       bounds.extend(latLng);
+        //   })
+        // }
+
         return (
             <React.Fragment>
                 <section>
-                    <MapForm addLocation={this.addLocation} setFriend={this.props.setFriend} getFriendLocations={this.props.getFriendLocations} friendLocations={this.props.friendLocations} userLocations={this.props.userLocations} userFriends={this.props.userFriends} locations={this.props.locations} calculateCenter={this.calculateCenter}/>
+                    <MapForm addLocation={this.addLocation} clearMarkers={this.clearMarkers} clearAllMarkers={this.clearAllMarkers} clearAllMarkersSubmit={this.clearAllMarkersSubmit} setFriend={this.props.setFriend} getFriendLocations={this.props.getFriendLocations} friendLocations={this.props.friendLocations} userLocations={this.props.userLocations} userFriends={this.props.userFriends} locations={this.props.locations} calculateCenter={this.calculateCenter} coordinates={this.state.coordinates}/>
                     <div className="MapContainer">
-                        <Map
-                        google={this.props.google}
-                        zoom={8}
-                        style={mapStyles}
-                        initialCenter={this.state.center}
-                        >
-                        {this.displayMarkers()}
-                        </Map>
+                      {this.checkCenter(mapStyles)}
                     </div>
                 </section>
             </React.Fragment>
