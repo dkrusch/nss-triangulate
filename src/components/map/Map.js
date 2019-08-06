@@ -22,11 +22,11 @@ class MapPage extends Component {
         console.log("DONT BE IN HERE IT IS BAD TO BE IN HERE")
         const center = {lat: 36.1627, lng: -86.7816}
         return <Map
+        center={center}
         bounds={this.state.bounds}
         google={this.props.google}
         zoom={8}
         style={mapStyles}
-        center={center}
         >
         {this.displayMarkers()}
         </Map>
@@ -131,7 +131,6 @@ class MapPage extends Component {
         }
         else
         {
-          debugger
           const bounds = new window.google.maps.LatLngBounds()
           let newerCoords = newCoords.concat(latlong)
           console.log("HELLO", newerCoords)
