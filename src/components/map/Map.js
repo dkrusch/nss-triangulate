@@ -22,22 +22,7 @@ class MapPage extends Component {
         console.log("DONT BE IN HERE IT IS BAD TO BE IN HERE")
         const center = {lat: 36.1627, lng: -86.7816}
         return <Map
-        google={this.props.google}
-        zoom={8}
-        style={mapStyles}
-        initialCenter={center}
-        >
-        {this.displayMarkers()}
-        </Map>
-      }
-      else if (this.state.coordinates.length === 1)
-      {
-        console.log("the coordniate", this.state.coordinates)
-        console.log("the center", this.state.center)
-        const coordinate = this.state.coordinates[0]
-        const center = {lat: coordinate.latitude, lng: coordinate.longitude}
-        console.log(center)
-        return <Map
+        bounds={this.state.bounds}
         google={this.props.google}
         zoom={8}
         style={mapStyles}
@@ -46,14 +31,28 @@ class MapPage extends Component {
         {this.displayMarkers()}
         </Map>
       }
-      else
+      else if (this.state.coordinates.length === 1)
       {
+        console.log("the coordniate", this.state.coordinates)
+        console.log("the center", this.state.center)
         return <Map
-        bounds={bounds}
+        bounds={this.state.bounds}
         google={this.props.google}
         zoom={8}
         style={mapStyles}
         center={this.state.center}
+        >
+        {this.displayMarkers()}
+        </Map>
+      }
+      else
+      {
+        console.log(this.state.bounds)
+        return <Map
+        bounds={this.state.bounds}
+        google={this.props.google}
+        zoom={8}
+        style={mapStyles}
         >
         {this.displayMarkers()}
         </Map>
@@ -92,7 +91,7 @@ class MapPage extends Component {
     }
 
     clearMarkers = () => {
-      const coords = this.state.coordinates
+      const coords = [...this.state.coordinates]
       let lastIndex = coords.length - 1
       console.log("coords", coords)
       console.log("inde", lastIndex)
@@ -110,16 +109,12 @@ class MapPage extends Component {
       }
     }
 
-    clearAllMarkers = (submit, location) => {
-      console.log("you are in clear all")
-      if (submit)
-      {
-        this.setState({coordinates: []}, () => this.addLocation(location))
-      }
-      else
-      {
+    clearAllMarkers = () => {
         this.setState({coordinates: []})
-      }
+    }
+
+    clearAllMarkersSubmit = (submit, location) => {
+        this.setState({coordinates: []}, () => this.addLocation(location))
     }
 
     addLocation = (latlong) => {
@@ -131,11 +126,24 @@ class MapPage extends Component {
         if (coordLength === 0)
         {
           let newCenter = newCoords.concat(latlong)
-          this.setState({center: newCenter}, () => this.setState({coordinates: newCenter}))
+          const center = {lat: newCenter[0].latitude, lng: newCenter[0].longitude}
+          this.setState({center: center, coordinates: newCenter})
         }
         else
         {
-          this.setState({coordinates: newCoords.concat(latlong)})
+          debugger
+          const bounds = new window.google.maps.LatLngBounds()
+          let newerCoords = newCoords.concat(latlong)
+          console.log("HELLO", newerCoords)
+          newerCoords.forEach(coordinate => {
+            console.log("bound loop", coordinate)
+            console.log("bounds?", bounds)
+            const latitude = coordinate.latitude
+            const longitude = coordinate.longitude
+            const latLng = new window.google.maps.LatLng(latitude, longitude);
+            bounds.extend(latLng);
+          })
+          this.setState({bounds: bounds}, () => this.setState({coordinates: newCoords.concat(latlong)}))
         }
     }
 
@@ -211,25 +219,24 @@ class MapPage extends Component {
             height: '66.4%',
           }
 
-        const bounds = new window.google.maps.LatLngBounds();
+        // const bounds = new window.google.maps.LatLngBounds();
 
-        if (this.state.coordinates.length > 1)
-        {
-          this.state.coordinates.map(coordinate => {
-              const latitude = coordinate.latitude
-              const longitude = coordinate.longitude
-              const latLng = new window.google.maps.LatLng(latitude, longitude);
-              bounds.extend(latLng);
-              return latLng;
-          })
-        }
+        // if (this.state.coordinates.length > 1)
+        // {
+        //   this.state.coordinates.forEach(coordinate => {
+        //       const latitude = coordinate.latitude
+        //       const longitude = coordinate.longitude
+        //       const latLng = new window.google.maps.LatLng(latitude, longitude);
+        //       bounds.extend(latLng);
+        //   })
+        // }
 
         return (
             <React.Fragment>
                 <section>
-                    <MapForm addLocation={this.addLocation} clearMarkers={this.clearMarkers} clearAllMarkers={this.clearAllMarkers} setFriend={this.props.setFriend} getFriendLocations={this.props.getFriendLocations} friendLocations={this.props.friendLocations} userLocations={this.props.userLocations} userFriends={this.props.userFriends} locations={this.props.locations} calculateCenter={this.calculateCenter} coordinates={this.state.coordinates}/>
+                    <MapForm addLocation={this.addLocation} clearMarkers={this.clearMarkers} clearAllMarkers={this.clearAllMarkers} clearAllMarkersSubmit={this.clearAllMarkersSubmit} setFriend={this.props.setFriend} getFriendLocations={this.props.getFriendLocations} friendLocations={this.props.friendLocations} userLocations={this.props.userLocations} userFriends={this.props.userFriends} locations={this.props.locations} calculateCenter={this.calculateCenter} coordinates={this.state.coordinates}/>
                     <div className="MapContainer">
-                      {this.checkCenter(mapStyles, bounds)}
+                      {this.checkCenter(mapStyles)}
                     </div>
                 </section>
             </React.Fragment>

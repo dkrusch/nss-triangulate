@@ -48,7 +48,7 @@ class MapForm extends Component {
           const submit = true
           console.log(coords)
           console.log("helloooooooooo", coords[lastIndex].style)
-          this.props.clearAllMarkers(submit, this.state)
+          this.props.clearAllMarkersSubmit(submit, this.state)
           this.clearFields()
         }
         else
@@ -85,7 +85,7 @@ class MapForm extends Component {
         // Sets the state with the values from the dropdowns, waits, then sends the state into the passed function
         this.setState(
           {latitude: +selectedLocation.latitude, longitude: +selectedLocation.longitude},
-          () => this.props.clearAllMarkers(submit, this.state))
+          () => this.props.clearAllMarkersSubmit(submit, this.state))
       }
       else
       {
@@ -126,6 +126,28 @@ class MapForm extends Component {
       id="clear"
       onClick={this.props.clearMarkers}
       disabled
+      className="btn btn-primary"
+      >
+        Clear
+      </button>
+      <button
+      type="button"
+      id="clear"
+      onClick={this.props.clearAllMarkers}
+      disabled
+      className="btn btn-primary"
+      >
+        Clear All
+      </button>
+      </div>
+    }
+    else if (coordinates.length === 1)
+    {
+      console.log("here i amnt", coordinates)
+      return <div className="clear-buttons"><button
+      type="button"
+      id="clear"
+      onClick={this.props.clearMarkers}
       className="btn btn-primary"
       >
         Clear
