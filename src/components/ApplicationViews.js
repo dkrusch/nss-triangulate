@@ -171,6 +171,8 @@ class ApplicationViews extends Component {
 
   addItem = (name, item) => {
     APIManager.post(name, item)
+    .then(() => APIManager.getAll("locations"))
+    .then(locations => this.setState({locations: locations}))
     .then(() => APIManager.getLike("locations", +sessionStorage.getItem("activeUser")))
     .then(userPlaces => this.setState({userLocations: userPlaces}, () => this.updateFriends()))
   }

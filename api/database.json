@@ -47,6 +47,30 @@
       "central": false,
       "user_id": 1,
       "id": 12
+    },
+    {
+      "name": "Test",
+      "latitude": "47.3",
+      "longitude": "-121.1",
+      "central": false,
+      "user_id": 12,
+      "id": 13
+    },
+    {
+      "name": "new",
+      "latitude": "36.3",
+      "longitude": "-81.3",
+      "central": false,
+      "user_id": 12,
+      "id": 14
+    },
+    {
+      "name": "thing",
+      "latitude": "47.2",
+      "longitude": "-121.3",
+      "central": false,
+      "user_id": 12,
+      "id": 15
     }
   ],
   "friends": [
@@ -69,6 +93,16 @@
       "user_id": 1,
       "friend_id": 6,
       "id": 9
+    },
+    {
+      "user_id": 12,
+      "friend_id": 3,
+      "id": 10
+    },
+    {
+      "user_id": 12,
+      "friend_id": 1,
+      "id": 11
     }
   ],
   "users": [
@@ -137,6 +171,12 @@
       "email": "5@5.com",
       "password": "5",
       "id": 11
+    },
+    {
+      "username": "User1",
+      "email": "user@user.com",
+      "password": "User1",
+      "id": 12
     }
   ]
 }
