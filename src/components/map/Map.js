@@ -22,7 +22,8 @@ class MapPage extends Component {
         console.log("DONT BE IN HERE IT IS BAD TO BE IN HERE")
         const center = {lat: 36.1627, lng: -86.7816}
         return <Map
-        center={center}
+        initialCenter={center}
+        streetViewControl={false}
         bounds={this.state.bounds}
         google={this.props.google}
         zoom={8}
@@ -37,6 +38,7 @@ class MapPage extends Component {
         console.log("the center", this.state.center)
         return <Map
         bounds={this.state.bounds}
+        streetViewControl={false}
         google={this.props.google}
         zoom={8}
         style={mapStyles}
@@ -50,6 +52,7 @@ class MapPage extends Component {
         console.log(this.state.bounds)
         return <Map
         bounds={this.state.bounds}
+        streetViewControl={false}
         google={this.props.google}
         zoom={8}
         style={mapStyles}
@@ -134,15 +137,20 @@ class MapPage extends Component {
           const bounds = new window.google.maps.LatLngBounds()
           let newerCoords = newCoords.concat(latlong)
           console.log("HELLO", newerCoords)
-          newerCoords.forEach(coordinate => {
-            console.log("bound loop", coordinate)
-            console.log("bounds?", bounds)
-            const latitude = coordinate.latitude
-            const longitude = coordinate.longitude
-            const latLng = new window.google.maps.LatLng(latitude, longitude);
-            bounds.extend(latLng);
-          })
-          this.setState({bounds: bounds}, () => this.setState({coordinates: newCoords.concat(latlong)}))
+          const existent = this.state.coordinates.find(coordinate => (coordinate.latitude === latlong.latitude && coordinate.longitude === latlong.longitude))
+          console.log("does it exist", existent)
+          if (!existent)
+          {
+            newerCoords.forEach(coordinate => {
+              console.log("bound loop", coordinate)
+              console.log("bounds?", bounds)
+              const latitude = coordinate.latitude
+              const longitude = coordinate.longitude
+              const latLng = new window.google.maps.LatLng(latitude, longitude);
+              bounds.extend(latLng);
+            })
+            this.setState({bounds: bounds}, () => this.setState({coordinates: newCoords.concat(latlong)}))
+          }
         }
     }
 

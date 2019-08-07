@@ -75,7 +75,7 @@ class MapForm extends Component {
     if (+index.value !== 0)
     {
       let selectedLocation = this.props.locations.find(location => location.name === dropdown.value)
-
+      console.log("you checking the dropdown")
       const coords = this.props.coordinates
       const lastIndex = coords.length - 1
       if (coords.length !== 0 && coords[lastIndex].style === "center")
@@ -89,6 +89,8 @@ class MapForm extends Component {
       }
       else
       {
+        console.log("New thing", selectedLocation)
+        console.log("New thing", this.props.locations)
         this.setState(
           {latitude: +selectedLocation.latitude, longitude: +selectedLocation.longitude},
           () => this.props.addLocation(this.state))
