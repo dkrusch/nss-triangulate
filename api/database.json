@@ -50,16 +50,16 @@
     },
     {
       "name": "Test",
-      "latitude": "47.3",
-      "longitude": "-121.1",
+      "latitude": "36.1",
+      "longitude": "-80.2",
       "central": false,
       "user_id": 12,
       "id": 13
     },
     {
       "name": "new",
-      "latitude": "36.3",
-      "longitude": "-81.3",
+      "latitude": "47.3",
+      "longitude": "-121.4",
       "central": false,
       "user_id": 12,
       "id": 14
@@ -71,6 +71,14 @@
       "central": false,
       "user_id": 12,
       "id": 15
+    },
+    {
+      "name": "What",
+      "latitude": "47.5",
+      "longitude": "-121.5",
+      "central": false,
+      "user_id": 12,
+      "id": 16
     }
   ],
   "friends": [

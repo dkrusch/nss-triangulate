@@ -51,12 +51,23 @@ class Add extends Component {
     }
     else
     {
-        object.name = this.state.name
-        object.latitude = this.state.latitude
-        object.longitude = this.state.longitude
-        this.props.updateItem("locations", object)
-        document.getElementById(`show-location-${id}`).style.display = "flex"
-        document.getElementById(`edit-location-${id}`).style.display = "none"
+      // Thank you guy from stack overflow https://stackoverflow.com/questions/22903756/using-regular-expression-to-validate-latitude-and-longitude-coordinates-then-dis
+        const latRegex = /^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,15}/g;
+        const lngRegex = /^-?(([-+]?)([\d]{1,3})((\.)(\d+))?)/g;
+
+        if (latRegex.exec(this.state.latitude) && lngRegex.exec(this.state.longitude))
+        {
+          object.name = this.state.name
+          object.latitude = this.state.latitude
+          object.longitude = this.state.longitude
+          this.props.updateItem("locations", object)
+          document.getElementById(`show-location-${id}`).style.display = "flex"
+          document.getElementById(`edit-location-${id}`).style.display = "none"
+        }
+        else
+        {
+          alert("Please enter valid coordinates")
+        }
     }
   }
 
