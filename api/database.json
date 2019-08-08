@@ -1,7 +1,7 @@
 {
   "locations": [
     {
-      "name": "Homec",
+      "name": "Home",
       "latitude": "36.1625",
       "longitude": "-86.7816",
       "user_id": 1,
@@ -10,8 +10,8 @@
     },
     {
       "name": "Home2",
-      "latitude": "35.5951",
-      "longitude": "-82.5515",
+      "latitude": "36.5951",
+      "longitude": "-87.5515",
       "user_id": 2,
       "central": false,
       "id": 3
@@ -41,44 +41,20 @@
       "id": 6
     },
     {
-      "name": "NewLocation",
-      "latitude": "36.11111",
-      "longitude": "-86.7816",
-      "central": false,
-      "user_id": 1,
-      "id": 12
-    },
-    {
-      "name": "Test",
-      "latitude": "36.1",
-      "longitude": "-80.2",
-      "central": false,
-      "user_id": 12,
-      "id": 13
-    },
-    {
-      "name": "new",
-      "latitude": "47.3",
-      "longitude": "-121.4",
-      "central": false,
-      "user_id": 12,
-      "id": 14
-    },
-    {
-      "name": "thing",
-      "latitude": "47.2",
-      "longitude": "-121.3",
-      "central": false,
-      "user_id": 12,
-      "id": 15
-    },
-    {
-      "name": "What",
+      "name": "Seattle",
       "latitude": "47.5",
       "longitude": "-121.5",
       "central": false,
-      "user_id": 12,
+      "user_id": 1,
       "id": 16
+    },
+    {
+      "name": "Birm",
+      "latitude": "33.518",
+      "longitude": "-86.81",
+      "central": false,
+      "user_id": 2,
+      "id": 17
     }
   ],
   "friends": [
@@ -88,28 +64,13 @@
       "id": 5
     },
     {
-      "user_id": 1,
-      "friend_id": 2,
-      "id": 6
-    },
-    {
-      "user_id": 1,
-      "friend_id": 4,
-      "id": 8
-    },
-    {
-      "user_id": 1,
-      "friend_id": 6,
-      "id": 9
-    },
-    {
       "user_id": 12,
       "friend_id": 3,
       "id": 10
     },
     {
-      "user_id": 12,
-      "friend_id": 1,
+      "user_id": 1,
+      "friend_id": 2,
       "id": 11
     }
   ],
@@ -128,63 +89,15 @@
     },
     {
       "id": 3,
-      "email": "1@1.com",
-      "password": "1",
-      "username": "ZZZZZZZZZZZ"
-    },
-    {
-      "id": 4,
-      "email": "2@2.com",
-      "password": "2",
+      "email": "3@3.com",
+      "password": "3",
       "username": "3"
     },
     {
-      "id": 5,
-      "email": "1@1.com",
-      "password": "1",
-      "username": "goodbye"
-    },
-    {
-      "id": 6,
-      "email": "2@2.com",
-      "password": "2",
-      "username": "hello"
-    },
-    {
-      "username": "newguy",
-      "email": "new@old.com",
-      "password": "oldguy",
-      "id": 7
-    },
-    {
-      "username": "Old",
-      "email": "old@new.com",
-      "password": "notnew",
-      "id": 8
-    },
-    {
-      "username": "newgu",
-      "email": "ne@old.com",
-      "password": "oldguy",
-      "id": 9
-    },
-    {
-      "username": "woiefj",
-      "email": "jfojef",
-      "password": "eapeif",
-      "id": 10
-    },
-    {
-      "username": "5",
-      "email": "5@5.com",
-      "password": "5",
-      "id": 11
-    },
-    {
-      "username": "User1",
-      "email": "user@user.com",
-      "password": "User1",
-      "id": 12
+      "id": 4,
+      "email": "4@4.com",
+      "password": "4",
+      "username": "4"
     }
   ]
 }

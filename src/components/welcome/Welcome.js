@@ -2,6 +2,7 @@ import React, { Component } from "react"
 // import NavBar from "./nav/NavBar"
 // import ApplicationViews from "./ApplicationViews"
 // import "./Nutshell.css"
+import "./Welcome.css"
 
 class Welcome extends Component {
   buttonClick = event =>
@@ -19,8 +20,16 @@ class Welcome extends Component {
   render() {
     return (
     <React.Fragment>
-        <button id="login" onClick={this.buttonClick}>Login</button>
-        <button id="register" onClick={this.buttonClick}>Register</button>
+        <div className="center">
+          <div className="form">
+            <h1 className="title">Triangulate</h1>
+            <div className="button-form">
+              <button className="button" id="login" onClick={this.buttonClick}>Login</button>
+              <div className="line"></div>
+              <button className="button" id="register" onClick={this.buttonClick}>Register</button>
+            </div>
+          </div>
+        </div>
     </React.Fragment>
     )
   }
