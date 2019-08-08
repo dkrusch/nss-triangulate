@@ -1,6 +1,7 @@
 //Group
 //Queries db for user id and sets session storage to id
 import React, { Component } from 'react'
+import "./Welcome.css"
 
 export default class Login extends Component {
 
@@ -28,7 +29,7 @@ export default class Login extends Component {
             sessionStorage.setItem("activeUser", user[0].id)
             this.props.setUser(user[0].id)
             //routing to dashboard
-            this.props.history.push("/")
+            this.props.history.push("/triangulate")
           }
           else window.alert("That password is incorrect")
         console.log(user)
@@ -38,22 +39,28 @@ export default class Login extends Component {
   render() {
     console.log(this.props)
     return (
-      <div>
-        <h1>Please Login</h1>
-        <input
-          autoFocus
-          id="username"
-          placeholder="username"
-          onChange={this.handleFieldChange}
-        />
-        <input
-          id="password"
-          placeholder="password"
-          onChange={this.handleFieldChange}
-        />
-        <button onClick={this.handleSubmit}>
-          login
-        </button>
+      <div className="center">
+        <div className="form">
+          <div className="title"><h1>Log In</h1></div>
+          <div className="input-form">
+              <input
+                autoFocus
+                id="username"
+                className="welcome-input"
+                placeholder="Enter Username..."
+                onChange={this.handleFieldChange}
+              />
+              <input
+                id="password"
+                className="welcome-input"
+                placeholder="Enter Password..."
+                onChange={this.handleFieldChange}
+              />
+          <button className="submit" onClick={this.handleSubmit}>
+            Log In
+          </button>
+          </div>
+        </div>
       </div>
     )
   }

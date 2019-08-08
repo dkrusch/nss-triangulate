@@ -223,7 +223,7 @@ class MapPage extends Component {
     render() {
         const mapStyles = {
             width: '100%',
-            height: '66.4%',
+            height: '72%',
           }
 
         // const bounds = new window.google.maps.LatLngBounds();

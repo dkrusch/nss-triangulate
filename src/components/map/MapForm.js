@@ -297,11 +297,13 @@ class MapForm extends Component {
               Submit
             </button>
           </div>
-          <div className="submit-group">
-            {this.disableCalculate(this.props.coordinates)}
-          </div>
-          <div className="clear-group">
-            {this.disableClearButtons(this.props.coordinates)}
+          <div className="button-form">
+            <div className="submit-group">
+              {this.disableCalculate(this.props.coordinates)}
+            </div>
+            <div className="clear-group">
+              {this.disableClearButtons(this.props.coordinates)}
+            </div>
           </div>
         </form>
       </React.Fragment>

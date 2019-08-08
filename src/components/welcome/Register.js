@@ -61,25 +61,30 @@ export default class Register extends Component {
   render() {
     console.log(this.props)
     return (
-      <div>
-        <h1>Please Register</h1>
-        <input
-          autoFocus
-          onChange={this.handleFieldChange}
-          id="username"
-          placeholder="username"
-        />
-        <input
-          id="password"
-          onChange={this.handleFieldChange}
-          placeholder="password"
-        />
-        <input
-          id="email"
-          onChange={this.handleFieldChange}
-          placeholder="email"
-        />
-        <button onClick={this.handleChange}>Register</button>
+      <div className="center">
+        <div className="form">
+          <div className="title"><h1>Please Register</h1></div>
+          <input
+            autoFocus
+            onChange={this.handleFieldChange}
+            className="welcome-input"
+            id="username"
+            placeholder="username"
+          />
+          <input
+            id="password"
+            onChange={this.handleFieldChange}
+            className="welcome-input"
+            placeholder="password"
+          />
+          <input
+            id="email"
+            onChange={this.handleFieldChange}
+            className="welcome-input"
+            placeholder="email"
+          />
+          <button className="submit" onClick={this.handleChange}>Register</button>
+        </div>
       </div>
     )
   }
