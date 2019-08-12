@@ -49,7 +49,7 @@ class AddFriendForm extends Component {
     return (
       <React.Fragment>
         <form className="articleForm">
-            <label for="stranger-choice">Search for a friend:</label>
+            <label for="stranger-choice">Search:</label>
             <input list="strangers" id="stranger-choice" name="friend-search" />
             <datalist id="strangers">
                 {
@@ -60,7 +60,7 @@ class AddFriendForm extends Component {
             <button
                 type="submit"
                 onClick={this.addFriend}
-                className="btn btn-primary"
+                className="add-button"
             >
                 Submit
             </button>

@@ -74,6 +74,42 @@ html, body {
     color: white;
 }
 
+.add-input {
+    margin-right: 10px;
+    width: 150px;
+}
+
+.add {
+    margin: 20px 10px;
+}
+
+.add-card {
+    margin: 5px 0px;
+}
+
+.list-form-locations {
+    width: 70%;
+    margin: 0px 10px;
+}
+
+.articleForm {
+    display: flex;
+    flex-direction: row;
+}
+
+.add-button {
+    align-items: center;
+    padding:0;
+    border: none;
+    cursor: pointer;
+    font-family: "Lato";
+    /* font-size: 1.25em; */
+    width: 120px;
+    /* height: 30px; */
+    background-color: #606060;
+    color: white;
+}
+
 .line {
     border-left: 1px solid rgb(131, 131, 131);
     height: 20px;

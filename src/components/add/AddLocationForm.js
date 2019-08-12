@@ -51,37 +51,37 @@ class AddLocationForm extends Component {
       <React.Fragment>
         <form className="eventForm">
           <div className="form-group">
-            <label htmlFor="name">Name</label>
             <input
               type="text"
               required
-              className="form-control"
+              className="form-control add-input"
               onChange={this.handleFieldChange}
+              placeHolder="Name"
               id="name"
               value={this.state.eventName}
             />
-            <label htmlFor="date">Latitude</label>
             <input
               type="text"
               required
-              className="form-control"
+              className="form-control add-input"
               onChange={this.handleFieldChange}
+              placeHolder="Latitude"
               id="latitude"
               value={this.state.eventDate}
             />
-            <label htmlFor="location">Longitude</label>
             <input
               type="text"
               required
-              className="form-control"
+              className="form-control add-input"
               onChange={this.handleFieldChange}
+              placeHolder="Longitude"
               id="longitude"
               value={this.state.eventlocation}
             />
             <button
               type="submit"
               onClick={this.checkFields}
-              className="btn btn-primary"
+              className="add-button"
             >
               Submit
             </button>

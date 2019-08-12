@@ -83,105 +83,107 @@ class Add extends Component {
       //if there is an active user
       return (
         <React.Fragment>
-          <div className="add-locations">
-            <div className="list-form">
-                <AddLocationForm addItem={this.props.addItem}/>
-                <section className="events">
-                {
-                    // Sorts the events from the database by date, based on unix time
-                    this.props.userLocations.map((location) =>
-                    {
-                            return <div key={location.id} className="card card--location" id="soonest">
-                                    <div className="card-body" id={`show-location-${location.id}`}>
-                                        <div className="card-title">
-                                            <h5>{location.name}</h5>
-                                            <h6>Latitude: {location.latitude}</h6>
-                                            <h6>Longitude: {location.longitude}</h6>
-                                            <button
-                                            type="submit"
-                                            onClick={(e) => this.showDiv(e, location)}
-                                            className="btn btn-primary"
-                                            id={`edit-button-${location.id}`}
-                                            >
-                                            Edit
-                                            </button>
-                                            <button
-                                            type="submit"
-                                            onClick={(e) => this.deleteItem(e, location.id)}
-                                            className="btn btn-primary"
-                                            id={`delete-location-${location.id}`}
-                                            >
-                                            Delete
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div className="card-body" style={dontshow} id={`edit-location-${location.id}`}>
-                                        <label htmlFor="name">Name:</label>
-                                        <input
-                                        type="text"
-                                        required
-                                        className="form-control"
-                                        onChange={this.handleFieldChange}
-                                        id={`name-${location.id}`}
-                                        />
-                                        <label htmlFor="name">Latitude:</label>
-                                        <input
-                                        type="text"
-                                        required
-                                        className="form-control"
-                                        onChange={this.handleFieldChange}
-                                        id={`latitude-${location.id}`}
-                                        />
-                                        <label htmlFor="date">Longitude:</label>
-                                        <input
-                                        type="text"
-                                        key="long"
-                                        required
-                                        className="form-control"
-                                        onChange={this.handleFieldChange}
-                                        id={`longitude-${location.id}`}
-                                        />
-                                        <button
-                                        type="submit"
-                                        onClick={(e) => this.showDiv(e, location)}
-                                        className="btn btn-primary"
-                                        id={`submit-button-${location.id}`}
-                                        >
-                                        Submit
-                                        </button>
-                                    </div>
-                                </div>
-                    })
-                }
-                </section>
-            </div>
-            <div className="list-form">
-                {console.log(this.props.userFriends)}
-                <AddFriendForm users={this.props.users} addItem={this.props.addItem} strangers={this.props.strangers}/>
-                <section className="events">
-                {
-                    // Sorts the events from the database by date, based on unix time
-                    this.props.userFriends.map((friend) =>
-                    {
-                            return <div key={friend.id} className="card card--friend" id="soonest">
-                                    <div className="card-body">
-                                        <div className="card-title">
-                                            <h5>{friend.username}</h5>
-                                            <h6>{friend.email}</h6>
-                                        </div>
-                                    </div>
-                                    <button
-                                            type="submit"
-                                            onClick={(e) => this.deleteItem(e, friend.join_id)}
-                                            className="btn btn-primary"
-                                            id={`delete-user-${friend.id}`}
-                                            >
-                                            Delete
-                                    </button>
-                                </div>
-                    })
-                }
-                </section>
+          <div className="add">
+            <div className="add-locations">
+              <div className="list-form-locations">
+                  <AddLocationForm addItem={this.props.addItem}/>
+                  <section className="events">
+                  {
+                      // Sorts the events from the database by date, based on unix time
+                      this.props.userLocations.map((location) =>
+                      {
+                              return <div key={location.id} className="card card--location add-card" id="soonest">
+                                      <div className="card-body" id={`show-location-${location.id}`}>
+                                          <div className="card-title">
+                                              <h5>{location.name}</h5>
+                                              <h6>Latitude: {location.latitude}</h6>
+                                              <h6>Longitude: {location.longitude}</h6>
+                                              <button
+                                              type="submit"
+                                              onClick={(e) => this.showDiv(e, location)}
+                                              className="add-button"
+                                              id={`edit-button-${location.id}`}
+                                              >
+                                              Edit
+                                              </button>
+                                              <button
+                                              type="submit"
+                                              onClick={(e) => this.deleteItem(e, location.id)}
+                                              className="add-button"
+                                              id={`delete-location-${location.id}`}
+                                              >
+                                              Delete
+                                              </button>
+                                          </div>
+                                      </div>
+                                      <div className="card-body" style={dontshow} id={`edit-location-${location.id}`}>
+                                          <label htmlFor="name">Name:</label>
+                                          <input
+                                          type="text"
+                                          required
+                                          className="form-control"
+                                          onChange={this.handleFieldChange}
+                                          id={`name-${location.id}`}
+                                          />
+                                          <label htmlFor="name">Latitude:</label>
+                                          <input
+                                          type="text"
+                                          required
+                                          className="form-control"
+                                          onChange={this.handleFieldChange}
+                                          id={`latitude-${location.id}`}
+                                          />
+                                          <label htmlFor="date">Longitude:</label>
+                                          <input
+                                          type="text"
+                                          key="long"
+                                          required
+                                          className="form-control"
+                                          onChange={this.handleFieldChange}
+                                          id={`longitude-${location.id}`}
+                                          />
+                                          <button
+                                          type="submit"
+                                          onClick={(e) => this.showDiv(e, location)}
+                                          className="add-button"
+                                          id={`submit-button-${location.id}`}
+                                          >
+                                          Submit
+                                          </button>
+                                      </div>
+                                  </div>
+                      })
+                  }
+                  </section>
+              </div>
+              <div className="list-form-friends">
+                  {console.log(this.props.userFriends)}
+                  <AddFriendForm users={this.props.users} addItem={this.props.addItem} strangers={this.props.strangers}/>
+                  <section className="events">
+                  {
+                      // Sorts the events from the database by date, based on unix time
+                      this.props.userFriends.map((friend) =>
+                      {
+                              return <div key={friend.id} className="card card--friend add-card" id="soonest">
+                                      <div className="card-body">
+                                          <div className="card-title">
+                                              <h5>{friend.username}</h5>
+                                              <h6>{friend.email}</h6>
+                                          </div>
+                                      </div>
+                                      <button
+                                              type="submit"
+                                              onClick={(e) => this.deleteItem(e, friend.join_id)}
+                                              className="add-button"
+                                              id={`delete-user-${friend.id}`}
+                                              >
+                                              Delete
+                                      </button>
+                                  </div>
+                      })
+                  }
+                  </section>
+              </div>
             </div>
           </div>
         </React.Fragment>
