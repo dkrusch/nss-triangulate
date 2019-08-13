@@ -48,9 +48,8 @@ class AddFriendForm extends Component {
   render() {
     return (
       <React.Fragment>
-        <form className="articleForm">
-            <label for="stranger-choice">Search:</label>
-            <input list="strangers" id="stranger-choice" name="friend-search" />
+        <form className="articleForm form-group">
+            <input list="strangers" id="stranger-choice" className="datalist-friend" name="friend-search" placeholder="Search for a friend"/>
             <datalist id="strangers">
                 {
                     this.props.strangers.map((stranger) =>

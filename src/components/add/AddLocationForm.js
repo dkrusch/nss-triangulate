@@ -54,7 +54,7 @@ class AddLocationForm extends Component {
             <input
               type="text"
               required
-              className="form-control add-input"
+              className="datalist-location add-input"
               onChange={this.handleFieldChange}
               placeHolder="Name"
               id="name"
@@ -63,7 +63,7 @@ class AddLocationForm extends Component {
             <input
               type="text"
               required
-              className="form-control add-input"
+              className="datalist-location add-input"
               onChange={this.handleFieldChange}
               placeHolder="Latitude"
               id="latitude"
@@ -72,7 +72,7 @@ class AddLocationForm extends Component {
             <input
               type="text"
               required
-              className="form-control add-input"
+              className="datalist-location add-input"
               onChange={this.handleFieldChange}
               placeHolder="Longitude"
               id="longitude"

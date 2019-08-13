@@ -86,18 +86,22 @@ class Add extends Component {
           <div className="add">
             <div className="add-locations">
               <div className="list-form-locations">
+                  <div>Add A Location:</div>
                   <AddLocationForm addItem={this.props.addItem}/>
                   <section className="events">
                   {
                       // Sorts the events from the database by date, based on unix time
                       this.props.userLocations.map((location) =>
                       {
-                              return <div key={location.id} className="card card--location add-card" id="soonest">
-                                      <div className="card-body" id={`show-location-${location.id}`}>
-                                          <div className="card-title">
+                              return <div key={location.id} className="card--location add-card" id="soonest">
+                                      <div id={`show-location-${location.id}`}>
+                                          <div className="card-title single-card">
+                                            <div className="submit-group">
                                               <h5>{location.name}</h5>
                                               <h6>Latitude: {location.latitude}</h6>
                                               <h6>Longitude: {location.longitude}</h6>
+                                            </div>  
+                                            <div className="clear-group">
                                               <button
                                               type="submit"
                                               onClick={(e) => this.showDiv(e, location)}
@@ -114,6 +118,7 @@ class Add extends Component {
                                               >
                                               Delete
                                               </button>
+                                            </div>
                                           </div>
                                       </div>
                                       <div className="card-body" style={dontshow} id={`edit-location-${location.id}`}>
@@ -156,7 +161,9 @@ class Add extends Component {
                   }
                   </section>
               </div>
+              <div className="add-line">sorry</div>
               <div className="list-form-friends">
+                <div>Add A Friend:</div>
                   {console.log(this.props.userFriends)}
                   <AddFriendForm users={this.props.users} addItem={this.props.addItem} strangers={this.props.strangers}/>
                   <section className="events">
@@ -164,7 +171,7 @@ class Add extends Component {
                       // Sorts the events from the database by date, based on unix time
                       this.props.userFriends.map((friend) =>
                       {
-                              return <div key={friend.id} className="card card--friend add-card" id="soonest">
+                              return <div key={friend.id} className="card--friend add-card" id="soonest">
                                       <div className="card-body">
                                           <div className="card-title">
                                               <h5>{friend.username}</h5>
