@@ -87,8 +87,12 @@ html, body {
     margin: 5px 0px;
 }
 
+.card-height {
+    height: 85.33px;
+}
+
 .list-form-locations {
-    width: 60%;
+    width: 70%;
     margin: 0px 10px;
 }
 
@@ -110,9 +114,23 @@ html, body {
     border: none;
     cursor: pointer;
     font-family: "Lato";
+    margin-left: 5px;
     /* font-size: 1.25em; */
     width: 120px;
-    /* height: 30px; */
+    height: 38px;
+    background-color: #606060;
+    color: white;
+}
+
+.add-button-location {
+    align-items: center;
+    padding:0;
+    border: none;
+    cursor: pointer;
+    font-family: "Lato";
+    /* font-size: 1.25em; */
+    width: 120px;
+    height: 38px;
     background-color: #606060;
     color: white;
 }

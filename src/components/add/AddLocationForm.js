@@ -51,40 +51,44 @@ class AddLocationForm extends Component {
       <React.Fragment>
         <form className="eventForm">
           <div className="form-group">
-            <input
-              type="text"
-              required
-              className="datalist-location add-input"
-              onChange={this.handleFieldChange}
-              placeHolder="Name"
-              id="name"
-              value={this.state.eventName}
-            />
-            <input
-              type="text"
-              required
-              className="datalist-location add-input"
-              onChange={this.handleFieldChange}
-              placeHolder="Latitude"
-              id="latitude"
-              value={this.state.eventDate}
-            />
-            <input
-              type="text"
-              required
-              className="datalist-location add-input"
-              onChange={this.handleFieldChange}
-              placeHolder="Longitude"
-              id="longitude"
-              value={this.state.eventlocation}
-            />
-            <button
+            <div className="input-group">
+              <input
+                type="text"
+                required
+                className="datalist-location add-input"
+                onChange={this.handleFieldChange}
+                placeHolder="Name"
+                id="name"
+                value={this.state.eventName}
+              />
+              <input
+                type="text"
+                required
+                className="datalist-location add-input"
+                onChange={this.handleFieldChange}
+                placeHolder="Latitude"
+                id="latitude"
+                value={this.state.eventDate}
+              />
+              <input
+                type="text"
+                required
+                className="datalist-location add-input"
+                onChange={this.handleFieldChange}
+                placeHolder="Longitude"
+                id="longitude"
+                value={this.state.eventlocation}
+              />
+            </div>
+            <div className="submit-group">
+              <button
               type="submit"
               onClick={this.checkFields}
-              className="add-button"
-            >
-              Submit
-            </button>
+              className="add-button-location"
+              >
+                Submit
+              </button>
+            </div>
           </div>
         </form>
       </React.Fragment>

@@ -96,9 +96,9 @@
     },
     {
       "id": 2,
-      "email": "2@2.com",
+      "email": "john3@gmail.com",
       "password": "2",
-      "username": "2"
+      "username": "John31"
     },
     {
       "id": 3,
@@ -108,9 +108,9 @@
     },
     {
       "id": 4,
-      "email": "4@4.com",
+      "email": "Dave4@gmail.com",
       "password": "4",
-      "username": "4"
+      "username": "Dave49"
     },
     {
       "username": "dkrusch",

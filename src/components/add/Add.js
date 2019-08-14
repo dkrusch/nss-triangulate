@@ -94,8 +94,8 @@ class Add extends Component {
                       this.props.userLocations.map((location) =>
                       {
                               return <div key={location.id} className="card--location add-card" id="soonest">
-                                      <div id={`show-location-${location.id}`}>
-                                          <div className="card-title single-card">
+                                      <div id={`show-location`}>
+                                          <div id={`show-location-${location.id}`} className="card-title single-card">
                                             <div className="submit-group">
                                               <h5>{location.name}</h5>
                                               <h6>Latitude: {location.latitude}</h6>
@@ -121,7 +121,8 @@ class Add extends Component {
                                             </div>
                                           </div>
                                       </div>
-                                      <div className="card-body" style={dontshow} id={`edit-location-${location.id}`}>
+                                      <div className="card-title single-card" style={dontshow} id={`edit-location-${location.id}`}>
+                                        <div className="submit-group">
                                           <label htmlFor="name">Name:</label>
                                           <input
                                           type="text"
@@ -147,14 +148,17 @@ class Add extends Component {
                                           onChange={this.handleFieldChange}
                                           id={`longitude-${location.id}`}
                                           />
+                                        </div>
+                                        <div className="clear-group">
                                           <button
                                           type="submit"
                                           onClick={(e) => this.showDiv(e, location)}
                                           className="add-button"
                                           id={`submit-button-${location.id}`}
                                           >
-                                          Submit
+                                          Save Changes
                                           </button>
+                                        </div>
                                       </div>
                                   </div>
                       })
@@ -172,20 +176,20 @@ class Add extends Component {
                       this.props.userFriends.map((friend) =>
                       {
                               return <div key={friend.id} className="card--friend add-card" id="soonest">
-                                      <div className="card-body">
+                                      <div className="card-title single-card card-height">
                                           <div className="card-title">
                                               <h5>{friend.username}</h5>
                                               <h6>{friend.email}</h6>
                                           </div>
-                                      </div>
-                                      <button
+                                          <button
                                               type="submit"
                                               onClick={(e) => this.deleteItem(e, friend.join_id)}
                                               className="add-button"
                                               id={`delete-user-${friend.id}`}
                                               >
                                               Delete
-                                      </button>
+                                        </button>
+                                      </div>
                                   </div>
                       })
                   }
