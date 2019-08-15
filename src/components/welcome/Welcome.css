@@ -108,6 +108,36 @@ html, body {
     flex-direction: row;
 }
 
+.logout {
+    align-items: center;
+    padding:0;
+    border: none;
+    cursor: pointer;
+    font-family: "Lato";
+    margin-left: 5px;
+    /* font-size: 1.25em; */
+    width: 120px;
+    height: 30px;
+    background-color: #606060;
+    color: white;
+}
+
+.link-group {
+    display: flex;
+}
+
+.navbar-link {
+    margin: auto;
+}
+
+.nav-color {
+    color: #606060;
+}
+
+.nav-color:hover {
+    color: #e67b14;
+}
+
 .add-button {
     align-items: center;
     padding:0;
@@ -184,6 +214,10 @@ html, body {
     height: auto; /* Override in-line if you want specific height. */
     color: transparent;
     float: left;
+}
+
+.edit-label {
+    margin: 0px;
 }
 
 .welcome-input {

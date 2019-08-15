@@ -123,7 +123,7 @@ class Add extends Component {
                                       </div>
                                       <div className="card-title single-card" style={dontshow} id={`edit-location-${location.id}`}>
                                         <div className="submit-group">
-                                          <label htmlFor="name">Name:</label>
+                                          <label htmlFor="name" className="edit-label">Name:</label>
                                           <input
                                           type="text"
                                           required
@@ -131,7 +131,7 @@ class Add extends Component {
                                           onChange={this.handleFieldChange}
                                           id={`name-${location.id}`}
                                           />
-                                          <label htmlFor="name">Latitude:</label>
+                                          <label htmlFor="name" className="edit-label">Latitude:</label>
                                           <input
                                           type="text"
                                           required
@@ -139,7 +139,7 @@ class Add extends Component {
                                           onChange={this.handleFieldChange}
                                           id={`latitude-${location.id}`}
                                           />
-                                          <label htmlFor="date">Longitude:</label>
+                                          <label htmlFor="date" className="edit-label">Longitude:</label>
                                           <input
                                           type="text"
                                           key="long"
