@@ -259,6 +259,11 @@ html, body {
 }
 
 .MapContainer > div {
-    width: 100% !important;
-    height: 68.9% !important;
+    width: 60% !important;
+    height: 91.9% !important;
+}
+
+.MapForm {
+    width: 38%;
+    float: right;
 }

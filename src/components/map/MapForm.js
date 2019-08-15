@@ -222,17 +222,8 @@ class MapForm extends Component {
     return (
       <React.Fragment>
         <form className="MapForm">
-          <section className="radio-choice">
-            <input type="radio" name="inputtype" value="user" onClick={this.showDiv}></input>
-            <label htmlFor="user" className="label-width">Your Locations</label>
-            <input type="radio" name="inputtype" value="friend" onClick={this.showDiv}></input>
-            <label htmlFor="friend" className="label-width">Friend Locations</label>
-            <input type="radio" name="inputtype" value="manual" onClick={this.showDiv} defaultChecked></input>
-            <label htmlFor="manual" className="label-width">Manual Location</label>
-          </section>
-          <div className="form-group" style={dontshow} id="user-form">
-            <label htmlFor="name" className="label-width">Saved Locations:</label>
-            <select className="user-location">
+          <div className="form-group" id="user-form">
+            <select className="user-location datalist-friend">
                 <option key={`location-option-0`} value="0" defaultValue>Pick a location...</option>
                 {this.props.userLocations.map((location, i) =>
                     {
@@ -249,9 +240,8 @@ class MapForm extends Component {
               Submit
             </button>
           </div>
-          <div className="form-group" style={dontshow} id="friend-form">
-            <label htmlFor="name" className="label-width">Friends:</label>
-            <select className="friend-option" onChange={this.generateFriendLocations}>
+          <div className="form-group" id="friend-form">
+            <select className="friend-option datalist-friend" onChange={this.generateFriendLocations}>
                 <option key={`friend-option-0`} value="0" defaultValue>Pick a friend...</option>
                 {this.props.userFriends.map((friend, i) =>
                     {
@@ -259,7 +249,6 @@ class MapForm extends Component {
                     }
                     )}
             </select>
-            <label htmlFor="date" className="label-width">Their Locations:</label>
             <FriendLocations friendLocations={this.props.friendLocations}/>
             <button
               type="submit"

@@ -229,10 +229,12 @@ class MapPage extends Component {
         return (
             <React.Fragment>
                 <section>
-                    <MapForm addLocation={this.addLocation} clearMarkers={this.clearMarkers} clearAllMarkers={this.clearAllMarkers} clearAllMarkersSubmit={this.clearAllMarkersSubmit} setFriend={this.props.setFriend} getFriendLocations={this.props.getFriendLocations} friendLocations={this.props.friendLocations} userLocations={this.props.userLocations} userFriends={this.props.userFriends} locations={this.props.locations} calculateCenter={this.calculateCenter} coordinates={this.state.coordinates}/>
+                  <div className="submit-group">
                     <div className="MapContainer">
                       {this.checkCenter(mapStyles)}
                     </div>
+                  </div>
+                    <MapForm addLocation={this.addLocation} clearMarkers={this.clearMarkers} clearAllMarkers={this.clearAllMarkers} clearAllMarkersSubmit={this.clearAllMarkersSubmit} setFriend={this.props.setFriend} getFriendLocations={this.props.getFriendLocations} friendLocations={this.props.friendLocations} userLocations={this.props.userLocations} userFriends={this.props.userFriends} locations={this.props.locations} calculateCenter={this.calculateCenter} coordinates={this.state.coordinates}/>
                 </section>
             </React.Fragment>
         );
