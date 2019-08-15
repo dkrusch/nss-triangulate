@@ -223,20 +223,8 @@ class MapPage extends Component {
     render() {
         const mapStyles = {
             width: '100%',
-            height: '72%',
+            height: '100%',
           }
-
-        // const bounds = new window.google.maps.LatLngBounds();
-
-        // if (this.state.coordinates.length > 1)
-        // {
-        //   this.state.coordinates.forEach(coordinate => {
-        //       const latitude = coordinate.latitude
-        //       const longitude = coordinate.longitude
-        //       const latLng = new window.google.maps.LatLng(latitude, longitude);
-        //       bounds.extend(latLng);
-        //   })
-        // }
 
         return (
             <React.Fragment>

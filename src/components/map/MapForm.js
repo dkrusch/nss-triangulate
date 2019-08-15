@@ -128,7 +128,7 @@ class MapForm extends Component {
       id="clear"
       onClick={this.props.clearMarkers}
       disabled
-      className="btn btn-primary"
+      className="add-button"
       >
         Clear
       </button>
@@ -137,7 +137,7 @@ class MapForm extends Component {
       id="clear"
       onClick={this.props.clearAllMarkers}
       disabled
-      className="btn btn-primary"
+      className="add-button"
       >
         Clear All
       </button>
@@ -150,7 +150,7 @@ class MapForm extends Component {
       type="button"
       id="clear"
       onClick={this.props.clearMarkers}
-      className="btn btn-primary"
+      className="add-button"
       >
         Clear
       </button>
@@ -159,7 +159,7 @@ class MapForm extends Component {
       id="clear"
       onClick={this.props.clearAllMarkers}
       disabled
-      className="btn btn-primary"
+      className="add-button"
       >
         Clear All
       </button>
@@ -172,7 +172,7 @@ class MapForm extends Component {
       type="button"
       id="clear"
       onClick={this.props.clearMarkers}
-      className="btn btn-primary"
+      className="add-button"
       >
         Clear
       </button>
@@ -180,7 +180,7 @@ class MapForm extends Component {
       type="button"
       id="clear"
       onClick={this.props.clearAllMarkers}
-      className="btn btn-primary"
+      className="add-button"
       >
         Clear All
       </button>
@@ -194,7 +194,7 @@ class MapForm extends Component {
       return <button
       type="submit"
       onClick={this.calculateCenter}
-      className="btn btn-primary"
+      className="add-button"
       >
         Calculate
       </button>
@@ -205,7 +205,7 @@ class MapForm extends Component {
         type="submit"
         onClick={this.calculateCenter}
         disabled
-        className="btn btn-primary"
+        className="add-button"
       >
         Calculate
       </button>
@@ -224,14 +224,14 @@ class MapForm extends Component {
         <form className="MapForm">
           <section className="radio-choice">
             <input type="radio" name="inputtype" value="user" onClick={this.showDiv}></input>
-            <label htmlFor="user">Your Locations</label>
+            <label htmlFor="user" className="label-width">Your Locations</label>
             <input type="radio" name="inputtype" value="friend" onClick={this.showDiv}></input>
-            <label htmlFor="friend">Friend Locations</label>
+            <label htmlFor="friend" className="label-width">Friend Locations</label>
             <input type="radio" name="inputtype" value="manual" onClick={this.showDiv} defaultChecked></input>
-            <label htmlFor="manual">Manual Location</label>
+            <label htmlFor="manual" className="label-width">Manual Location</label>
           </section>
           <div className="form-group" style={dontshow} id="user-form">
-            <label htmlFor="name">Saved Locations:</label>
+            <label htmlFor="name" className="label-width">Saved Locations:</label>
             <select className="user-location">
                 <option key={`location-option-0`} value="0" defaultValue>Pick a location...</option>
                 {this.props.userLocations.map((location, i) =>
@@ -244,13 +244,13 @@ class MapForm extends Component {
               type="submit"
               id="user-submit"
               onClick={this.checkDropdown}
-              className="btn btn-primary"
+              className="btn btn-primary add-button"
             >
               Submit
             </button>
           </div>
           <div className="form-group" style={dontshow} id="friend-form">
-            <label htmlFor="name">Friends:</label>
+            <label htmlFor="name" className="label-width">Friends:</label>
             <select className="friend-option" onChange={this.generateFriendLocations}>
                 <option key={`friend-option-0`} value="0" defaultValue>Pick a friend...</option>
                 {this.props.userFriends.map((friend, i) =>
@@ -259,40 +259,40 @@ class MapForm extends Component {
                     }
                     )}
             </select>
-            <label htmlFor="date">Their Locations:</label>
+            <label htmlFor="date" className="label-width">Their Locations:</label>
             <FriendLocations friendLocations={this.props.friendLocations}/>
             <button
               type="submit"
               id="friend-submit"
               onClick={this.checkDropdown}
-              className="btn btn-primary"
+              className="add-button"
             >
               Submit
             </button>
           </div>
           <div className="form-group" id="manual-form">
-            <label htmlFor="name">Latitude:</label>
             <input
               type="text"
               key="lat"
               required
-              className="form-control"
+              className="datalist-map"
+              placeholder="Latitude"
               onChange={this.handleFieldChange}
               id="lat1"
             />
-            <label htmlFor="date">Longitude:</label>
             <input
               type="text"
               key="long"
               required
-              className="form-control"
+              className="datalist-map"
+              placeholder="Longitude"
               onChange={this.handleFieldChange}
               id="long1"
             />
             <button
               type="submit"
               onClick={this.checkManualFields}
-              className="btn btn-primary"
+              className="add-button"
             >
               Submit
             </button>
