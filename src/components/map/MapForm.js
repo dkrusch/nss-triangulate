@@ -223,7 +223,7 @@ class MapForm extends Component {
       <React.Fragment>
         <form className="MapForm">
           <div className="form-group" id="user-form">
-            <select className="user-location datalist-friend">
+            <select className="user-location datalist-map-location a">
                 <option key={`location-option-0`} value="0" defaultValue>Pick a location...</option>
                 {this.props.userLocations.map((location, i) =>
                     {
@@ -235,13 +235,13 @@ class MapForm extends Component {
               type="submit"
               id="user-submit"
               onClick={this.checkDropdown}
-              className="btn btn-primary add-button"
+              className="add-button"
             >
               Submit
             </button>
           </div>
           <div className="form-group" id="friend-form">
-            <select className="friend-option datalist-friend" onChange={this.generateFriendLocations}>
+            <select className="friend-option datalist-map-friend" onChange={this.generateFriendLocations}>
                 <option key={`friend-option-0`} value="0" defaultValue>Pick a friend...</option>
                 {this.props.userFriends.map((friend, i) =>
                     {
@@ -286,10 +286,12 @@ class MapForm extends Component {
               Submit
             </button>
           </div>
-          <div className="button-form">
+          <div className="button-form-calculate">
             <div className="submit-group">
               {this.disableCalculate(this.props.coordinates)}
             </div>
+          </div>
+          <div className="button-form-clear">
             <div className="clear-group">
               {this.disableClearButtons(this.props.coordinates)}
             </div>

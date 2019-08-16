@@ -42,6 +42,18 @@ html, body {
     justify-content: space-between;
 }
 
+.button-form-calculate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-form-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .input-form {
     display: flex;
     flex-direction: column;
@@ -184,7 +196,39 @@ html, body {
 .datalist-map {
     display: block;
     height: calc(1.5em + .75rem + 2px);
-    width: 25%;
+    width: 45%;
+    margin-right: 10px;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.datalist-map-friend {
+    display: block;
+    height: calc(1.5em + .75rem + 2px);
+    width: 45%;
+    margin-right: 10px;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.datalist-map-location {
+    display: block;
+    height: calc(1.5em + .75rem + 2px);
+    width: 95.3%;
     margin-right: 10px;
     padding: .375rem .75rem;
     font-size: 1rem;
