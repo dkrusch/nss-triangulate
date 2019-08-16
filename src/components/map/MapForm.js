@@ -128,16 +128,19 @@ class MapForm extends Component {
       id="clear"
       onClick={this.props.clearMarkers}
       disabled
-      className="add-button"
+      className="add-button-map-disabled"
       >
-        Clear
+        Clear Marker
       </button>
+      <div className="submit-group">
+              {this.disableCalculate(this.props.coordinates)}
+      </div>
       <button
       type="button"
       id="clear"
       onClick={this.props.clearAllMarkers}
       disabled
-      className="add-button"
+      className="add-button-map-disabled"
       >
         Clear All
       </button>
@@ -150,16 +153,19 @@ class MapForm extends Component {
       type="button"
       id="clear"
       onClick={this.props.clearMarkers}
-      className="add-button"
+      className="add-button-map"
       >
-        Clear
+        Clear Marker
       </button>
+      <div className="submit-group">
+              {this.disableCalculate(this.props.coordinates)}
+      </div>  
       <button
       type="button"
       id="clear"
       onClick={this.props.clearAllMarkers}
       disabled
-      className="add-button"
+      className="add-button-map-disabled"
       >
         Clear All
       </button>
@@ -172,15 +178,18 @@ class MapForm extends Component {
       type="button"
       id="clear"
       onClick={this.props.clearMarkers}
-      className="add-button"
+      className="add-button-map"
       >
-        Clear
+        Clear Marker
       </button>
+      <div className="submit-group">
+              {this.disableCalculate(this.props.coordinates)}
+      </div>
       <button
       type="button"
       id="clear"
       onClick={this.props.clearAllMarkers}
-      className="add-button"
+      className="add-button-map"
       >
         Clear All
       </button>
@@ -194,9 +203,9 @@ class MapForm extends Component {
       return <button
       type="submit"
       onClick={this.calculateCenter}
-      className="add-button"
+      className="add-button-calculate"
       >
-        Calculate
+        Calculate Center
       </button>
     }
     else
@@ -205,9 +214,9 @@ class MapForm extends Component {
         type="submit"
         onClick={this.calculateCenter}
         disabled
-        className="add-button"
+        className="add-button-calculate-disabled"
       >
-        Calculate
+        Calculate Center
       </button>
     }
   }
@@ -222,25 +231,26 @@ class MapForm extends Component {
     return (
       <React.Fragment>
         <form className="MapForm">
-          <div className="form-group" id="user-form">
-            <select className="user-location datalist-map-location a">
-                <option key={`location-option-0`} value="0" defaultValue>Pick a location...</option>
-                {this.props.userLocations.map((location, i) =>
-                    {
-                        return <option key={`user-location-${i}`} value={`${location.name}`}>{location.name}</option>
-                    }
-                    )}
-            </select>
-            <button
-              type="submit"
-              id="user-submit"
-              onClick={this.checkDropdown}
-              className="add-button"
-            >
-              Submit
-            </button>
-          </div>
-          <div className="form-group" id="friend-form">
+          <div className="first-group">
+            <div className="form-group" id="user-form">
+              <select className="user-location datalist-map-location a">
+                  <option key={`location-option-0`} value="0" defaultValue>Pick a location...</option>
+                  {this.props.userLocations.map((location, i) =>
+                      {
+                          return <option key={`user-location-${i}`} value={`${location.name}`}>{location.name}</option>
+                      }
+                      )}
+              </select>
+              <button
+                type="submit"
+                id="user-submit"
+                onClick={this.checkDropdown}
+                className="add-button-map"
+              >
+                Submit
+              </button>
+            </div>
+            <div className="form-group" id="friend-form">
             <select className="friend-option datalist-map-friend" onChange={this.generateFriendLocations}>
                 <option key={`friend-option-0`} value="0" defaultValue>Pick a friend...</option>
                 {this.props.userFriends.map((friend, i) =>
@@ -254,12 +264,12 @@ class MapForm extends Component {
               type="submit"
               id="friend-submit"
               onClick={this.checkDropdown}
-              className="add-button"
+              className="add-button-map"
             >
               Submit
             </button>
-          </div>
-          <div className="form-group" id="manual-form">
+            </div>
+            <div className="form-group" id="manual-form">
             <input
               type="text"
               key="lat"
@@ -281,20 +291,19 @@ class MapForm extends Component {
             <button
               type="submit"
               onClick={this.checkManualFields}
-              className="add-button"
+              className="add-button-map"
             >
               Submit
             </button>
-          </div>
-          <div className="button-form-calculate">
-            <div className="submit-group">
-              {this.disableCalculate(this.props.coordinates)}
             </div>
-          </div>
-          <div className="button-form-clear">
-            <div className="clear-group">
+            <div className="button-form-clear">
               {this.disableClearButtons(this.props.coordinates)}
             </div>
+            <div className="button-form-calculate">
+            {/* <div className="submit-group">
+              {this.disableCalculate(this.props.coordinates)}
+            </div> */}
+          </div>
           </div>
         </form>
       </React.Fragment>
