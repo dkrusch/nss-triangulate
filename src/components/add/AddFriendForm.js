@@ -50,19 +50,23 @@ class AddFriendForm extends Component {
       <React.Fragment>
         <form className="articleForm form-group">
             <input list="strangers" id="stranger-choice" className="datalist-friend" name="friend-search" placeholder="Search for a friend"/>
-            <datalist id="strangers">
-                {
-                    this.props.strangers.map((stranger) =>
-                    <option key={`stranger-${stranger.id}`} value={stranger.username} />
-                )}
-            </datalist>
-            <button
-                type="submit"
-                onClick={this.addFriend}
-                className="add-button"
-            >
-                Submit
-            </button>
+            <div className="clear-group">
+              <datalist id="strangers">
+                  {
+                      this.props.strangers.map((stranger) =>
+                      <option key={`stranger-${stranger.id}`} value={stranger.username} />
+                  )}
+              </datalist>
+            </div>
+            <div className="submit-group">
+              <button
+                  type="submit"
+                  onClick={this.addFriend}
+                  className="add-button"
+              >
+                  Submit
+              </button>
+            </div>
         </form>
       </React.Fragment>
     )

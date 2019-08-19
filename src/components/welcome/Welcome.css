@@ -29,6 +29,10 @@ html, body {
     width: 100%;
 }
 
+.form {
+    justify-content: space-between;
+}
+
 .title
 {
     margin: 30px 0px;
@@ -349,7 +353,9 @@ html, body {
 }
 
 .MapForm {
-    margin: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     width: 38%;
     height: 521px;
     float: right;

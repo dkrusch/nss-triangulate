@@ -2,7 +2,7 @@
   "locations": [
     {
       "name": "Home",
-      "latitude": "36.16244",
+      "latitude": "36.16245",
       "longitude": "-86.7816",
       "user_id": 1,
       "central": false,
@@ -25,15 +25,15 @@
       "id": 4
     },
     {
-      "name": "Home3",
-      "latitude": "35.5951",
-      "longitude": "-82.5515",
+      "name": "Nashville",
+      "latitude": "36.1627",
+      "longitude": "-86.7816",
       "user_id": 4,
       "central": false,
       "id": 5
     },
     {
-      "name": "Work3",
+      "name": "Asheville",
       "latitude": "35.5951",
       "longitude": "-82.5515",
       "user_id": 4,
@@ -102,9 +102,9 @@
     },
     {
       "id": 3,
-      "email": "3@3.com",
+      "email": "nonfriend@gmail.com",
       "password": "3",
-      "username": "3"
+      "username": "xXnonfri3ndXx"
     },
     {
       "id": 4,
@@ -113,8 +113,8 @@
       "username": "Dave49"
     },
     {
-      "username": "dkrusch",
-      "email": "dkrusch@gmail.com",
+      "username": "super_beast",
+      "email": "super@beast.com",
       "password": "1111",
       "id": 5
     }

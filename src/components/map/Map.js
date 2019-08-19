@@ -1,7 +1,5 @@
 import React, { Component } from "react"
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-// import NavBar from "./nav/NavBar"
-// import ApplicationViews from "./ApplicationViews"
 import MapForm from "./MapForm"
 import * as math from 'mathjs'
 import "./Map.css"
@@ -24,6 +22,7 @@ class MapPage extends Component {
         return <Map
         initialCenter={center}
         streetViewControl={false}
+        mapTypeControl={false}
         bounds={this.state.bounds}
         google={this.props.google}
         zoom={8}
@@ -156,24 +155,6 @@ class MapPage extends Component {
           }
         }
     }
-
-    // getLocation = () =>
-    // {
-    //     if (navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition(function(position) {
-    //           var pos = {
-    //             lat: position.coords.latitude,
-    //             lng: position.coords.longitude
-    //           };
-    //           map.setCenter(pos);
-    //         }, function() {
-    //           handleLocationError(true, infoWindow, map.getCenter());
-    //         });
-    //       } else {
-    //         // Browser doesn't support Geolocation
-    //         handleLocationError(false, infoWindow, map.getCenter());
-    //       }
-    // }
 
     calculateCenter = () => {
 
