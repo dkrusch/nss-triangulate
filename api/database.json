@@ -53,12 +53,12 @@
       "latitude": "33.518",
       "longitude": "-86.81",
       "central": false,
-      "user_id": 2,
+      "user_id": 4,
       "id": 17
     },
     {
-      "name": "Seat",
-      "latitude": "47.3",
+      "name": "Seattle",
+      "latitude": "10.3",
       "longitude": "-121.3",
       "central": false,
       "user_id": 1,
@@ -85,6 +85,11 @@
       "user_id": 1,
       "friend_id": 4,
       "id": 12
+    },
+    {
+      "user_id": 1,
+      "friend_id": 5,
+      "id": 13
     }
   ],
   "users": [
