@@ -1,12 +1,26 @@
-Here's our logo (hover to see the title text):
+## What is Triangulate?
 
-Inline-style: 
+Basically, it allows a user to enter in or select different lat/long coordinates with which a geographical central coordinate will be presented for the user. So if a group of people want to meet at a truly central location, this app allows them to do that.
+
+This is the home page: 
 ![alt text](https://github.com/dkrusch/nss-triangulate/raw/master/images/triangulate1.png "Logo Title Text 1")
 
-Reference-style: 
+A user may select or enter coordinates using these inputs: 
 ![alt text][logo]
 
 [logo]: https://github.com/dkrusch/nss-triangulate/raw/master/images/triangulate2.png "Logo Title Text 2"
+
+When submitted the locations show up on the map as markers: 
+![alt text](https://github.com/dkrusch/nss-triangulate/raw/master/images/triangulate3.png "Logo Title Text 1")
+
+You can find the center by clicking the "Calculate Center" button on the right, the center coordinate shows up as a blue marker: 
+![alt text](https://github.com/dkrusch/nss-triangulate/raw/master/images/triangulate4.png "Logo Title Text 1")
+
+If you don't have any saved locations you can enter them manually in the input fields: 
+![alt text](https://github.com/dkrusch/nss-triangulate/raw/master/images/triangulate5.png "Logo Title Text 1")
+
+This page allows you to add locations to the dropdowns as well as friends who have their own save locations: 
+![alt text](https://github.com/dkrusch/nss-triangulate/raw/master/images/triangulate6.png "Logo Title Text 1")
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## Necessary Steps To Run Triangulate
