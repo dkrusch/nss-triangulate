@@ -1,12 +1,12 @@
 Here's our logo (hover to see the title text):
 
 Inline-style: 
-![alt text](https://github.com/dkrusch/nss-triangulate/images/triangulate1.png "Logo Title Text 1")
+![alt text](https://github.com/dkrusch/nss-triangulate/raw/master/images/triangulate1.png "Logo Title Text 1")
 
 Reference-style: 
 ![alt text][logo]
 
-[logo]: https://github.com/dkrusch/nss-triangulate/images/triangulate2.png "Logo Title Text 2"
+[logo]: https://github.com/dkrusch/nss-triangulate/raw/master/images/triangulate2.png "Logo Title Text 2"
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## Necessary Steps To Run Triangulate
