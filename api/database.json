@@ -85,11 +85,6 @@
       "user_id": 1,
       "friend_id": 4,
       "id": 12
-    },
-    {
-      "user_id": 1,
-      "friend_id": 5,
-      "id": 13
     }
   ],
   "users": [
