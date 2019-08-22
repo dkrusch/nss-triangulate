@@ -2,7 +2,7 @@
   "locations": [
     {
       "name": "Home",
-      "latitude": "36.1625",
+      "latitude": "36.16245",
       "longitude": "-86.7816",
       "user_id": 1,
       "central": false,
@@ -25,15 +25,15 @@
       "id": 4
     },
     {
-      "name": "Home3",
-      "latitude": "35.5951",
-      "longitude": "-82.5515",
+      "name": "Nashville",
+      "latitude": "36.1627",
+      "longitude": "-86.7816",
       "user_id": 4,
       "central": false,
       "id": 5
     },
     {
-      "name": "Work3",
+      "name": "Asheville",
       "latitude": "35.5951",
       "longitude": "-82.5515",
       "user_id": 4,
@@ -41,9 +41,9 @@
       "id": 6
     },
     {
-      "name": "Seattle",
-      "latitude": "47.5",
-      "longitude": "-121.5",
+      "name": "Asheville",
+      "latitude": "32.5",
+      "longitude": "-82.5",
       "central": false,
       "user_id": 1,
       "id": 16
@@ -53,8 +53,16 @@
       "latitude": "33.518",
       "longitude": "-86.81",
       "central": false,
-      "user_id": 2,
+      "user_id": 4,
       "id": 17
+    },
+    {
+      "name": "Seattle",
+      "latitude": "10.3",
+      "longitude": "-121.3",
+      "central": false,
+      "user_id": 1,
+      "id": 18
     }
   ],
   "friends": [
@@ -72,6 +80,16 @@
       "user_id": 1,
       "friend_id": 2,
       "id": 11
+    },
+    {
+      "user_id": 1,
+      "friend_id": 4,
+      "id": 12
+    },
+    {
+      "user_id": 1,
+      "friend_id": 5,
+      "id": 13
     }
   ],
   "users": [
@@ -83,21 +101,27 @@
     },
     {
       "id": 2,
-      "email": "2@2.com",
+      "email": "john3@gmail.com",
       "password": "2",
-      "username": "2"
+      "username": "John31"
     },
     {
       "id": 3,
-      "email": "3@3.com",
+      "email": "nonfriend@gmail.com",
       "password": "3",
-      "username": "3"
+      "username": "xXnonfri3ndXx"
     },
     {
       "id": 4,
-      "email": "4@4.com",
+      "email": "Dave4@gmail.com",
       "password": "4",
-      "username": "4"
+      "username": "Dave49"
+    },
+    {
+      "username": "super_beast",
+      "email": "super@beast.com",
+      "password": "1111",
+      "id": 5
     }
   ]
 }

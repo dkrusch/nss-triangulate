@@ -1,4 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Necessary Steps
+
+In the console please run: npm install --save google-maps-react
+
+As well as: npm install mathjs
+
+Then in a new console window, navigate to the api folder within the directory and run: json-server -p 5002 -w database.json
+
+Then in a new console window run: npm start
 
 ## Available Scripts
 

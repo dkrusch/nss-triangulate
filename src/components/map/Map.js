@@ -1,7 +1,5 @@
 import React, { Component } from "react"
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-// import NavBar from "./nav/NavBar"
-// import ApplicationViews from "./ApplicationViews"
 import MapForm from "./MapForm"
 import * as math from 'mathjs'
 import "./Map.css"
@@ -16,7 +14,7 @@ class MapPage extends Component {
         bounds: {}
       }
 
-    checkCenter = (mapStyles, bounds) => {
+    checkCenter = (mapStyle, mapStyles, bounds) => {
       if (this.state.coordinates.length === 0)
       {
         console.log("DONT BE IN HERE IT IS BAD TO BE IN HERE")
@@ -24,10 +22,12 @@ class MapPage extends Component {
         return <Map
         initialCenter={center}
         streetViewControl={false}
+        mapTypeControl={false}
         bounds={this.state.bounds}
         google={this.props.google}
         zoom={8}
-        style={mapStyles}
+        style={mapStyle}
+        styles={mapStyles}
         >
         {this.displayMarkers()}
         </Map>
@@ -41,7 +41,8 @@ class MapPage extends Component {
         streetViewControl={false}
         google={this.props.google}
         zoom={8}
-        style={mapStyles}
+        style={mapStyle}
+        styles={mapStyles}
         center={this.state.center}
         >
         {this.displayMarkers()}
@@ -55,7 +56,8 @@ class MapPage extends Component {
         streetViewControl={false}
         google={this.props.google}
         zoom={8}
-        style={mapStyles}
+        style={mapStyle}
+        styles={mapStyles}
         >
         {this.displayMarkers()}
         </Map>
@@ -154,24 +156,6 @@ class MapPage extends Component {
         }
     }
 
-    // getLocation = () =>
-    // {
-    //     if (navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition(function(position) {
-    //           var pos = {
-    //             lat: position.coords.latitude,
-    //             lng: position.coords.longitude
-    //           };
-    //           map.setCenter(pos);
-    //         }, function() {
-    //           handleLocationError(true, infoWindow, map.getCenter());
-    //         });
-    //       } else {
-    //         // Browser doesn't support Geolocation
-    //         handleLocationError(false, infoWindow, map.getCenter());
-    //       }
-    // }
-
     calculateCenter = () => {
 
         // Calls parseInputs
@@ -210,41 +194,273 @@ class MapPage extends Component {
         // change this so it goes inc coordinates instead with a style attribute
         let newCoords = [...this.state.coordinates]
         this.setState({coordinates: newCoords.concat(centerLatLng)})
-        // let marker = new google.maps.Marker(
-        // {
-        //     position: centerLatLng,
-        //     map: map,
-        //     title: 'Marker',
-        //     icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-        // });
-        // gmarkers.push(marker);
     }
 
     render() {
-        const mapStyles = {
+        const mapStyle = {
             width: '100%',
-            height: '72%',
+            height: '100%',
           }
 
-        // const bounds = new window.google.maps.LatLngBounds();
-
-        // if (this.state.coordinates.length > 1)
-        // {
-        //   this.state.coordinates.forEach(coordinate => {
-        //       const latitude = coordinate.latitude
-        //       const longitude = coordinate.longitude
-        //       const latLng = new window.google.maps.LatLng(latitude, longitude);
-        //       bounds.extend(latLng);
-        //   })
-        // }
+        const mapStyles = [
+          {
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#f5f5f5"
+              }
+            ]
+          },
+          {
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#616161"
+              }
+            ]
+          },
+          {
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#f5f5f5"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.land_parcel",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.land_parcel",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#efac8b"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.locality",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "weight": 1.5
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.neighborhood",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.province",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#ffffff"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.province",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              {
+                "color": "#ea8651"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.province",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#c1c1c1"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.province",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#f4f4f4"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#eeeeee"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#757575"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#e5e5e5"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#9e9e9e"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#ffffff"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "road.arterial",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#757575"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#dadada"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#616161"
+              }
+            ]
+          },
+          {
+            "featureType": "road.local",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#9e9e9e"
+              }
+            ]
+          },
+          {
+            "featureType": "transit.line",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#e5e5e5"
+              }
+            ]
+          },
+          {
+            "featureType": "transit.station",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#eeeeee"
+              }
+            ]
+          },
+          {
+            "featureType": "transit.station",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#ffffff"
+              }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#c9c9c9"
+              }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "labels.text",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#9e9e9e"
+              }
+            ]
+          }
+        ]
 
         return (
             <React.Fragment>
                 <section>
-                    <MapForm addLocation={this.addLocation} clearMarkers={this.clearMarkers} clearAllMarkers={this.clearAllMarkers} clearAllMarkersSubmit={this.clearAllMarkersSubmit} setFriend={this.props.setFriend} getFriendLocations={this.props.getFriendLocations} friendLocations={this.props.friendLocations} userLocations={this.props.userLocations} userFriends={this.props.userFriends} locations={this.props.locations} calculateCenter={this.calculateCenter} coordinates={this.state.coordinates}/>
+                  <div className="submit-group">
                     <div className="MapContainer">
-                      {this.checkCenter(mapStyles)}
+                      {this.checkCenter(mapStyle, mapStyles)}
                     </div>
+                  </div>
+                    <MapForm addLocation={this.addLocation} clearMarkers={this.clearMarkers} clearAllMarkers={this.clearAllMarkers} clearAllMarkersSubmit={this.clearAllMarkersSubmit} setFriend={this.props.setFriend} getFriendLocations={this.props.getFriendLocations} friendLocations={this.props.friendLocations} userLocations={this.props.userLocations} userFriends={this.props.userFriends} locations={this.props.locations} calculateCenter={this.calculateCenter} coordinates={this.state.coordinates}/>
                 </section>
             </React.Fragment>
         );

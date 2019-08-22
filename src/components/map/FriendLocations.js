@@ -13,7 +13,7 @@ class FriendLocations extends Component {
 
     return (
       <React.Fragment>
-            <select className="friend-location" onChange={this.generateFriendLocations}>
+            <select className="friend-location datalist-map-friend" onChange={this.generateFriendLocations}>
                 <option key={`friend-location-0`} value="0" defaultValue>Pick a location...</option>
                 {
                     this.props.friendLocations
