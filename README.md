@@ -9,7 +9,9 @@ As well as:
 
 ### `npm install mathjs`
 
-Then in a new console window, navigate to the api folder within the directory and run: json-server -p 5002 -w database.json
+Then in a new console window, navigate to the api folder within the directory and run: 
+
+### `json-server -p 5002 -w database.json`
 
 Then in a new console window run: 
 
