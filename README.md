@@ -36,6 +36,10 @@ This page allows you to add locations to the dropdowns as well as friends who ha
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## Necessary Steps To Run Triangulate
 
+First you will need your own google-maps api key. To do this visit this site https://developers.google.com/maps/documentation/javascript/get-api-key and follow the instructions.
+
+Once you have your api key, in the root project folder of the clone of this repository create a .env file, then inside that file type the text inside the qoutes: "REACT_APP_GOOGLE_MAP_KEY=your api key here"
+
 In the console please run: 
 
 ### `npm install --save google-maps-react`
