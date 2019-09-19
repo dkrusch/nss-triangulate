@@ -38,7 +38,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 First you will need your own google-maps api key. To do this visit this site https://developers.google.com/maps/documentation/javascript/get-api-key and follow the instructions.
 
-Once you have your api key, in the root project folder of the clone of this repository create a .env file, then inside that file type the text inside the qoutes: "REACT_APP_GOOGLE_MAP_KEY=[your api key here]".
+Once you have your api key, in the root project folder of the clone of this repository create a .env file, then inside that file type the text inside the qoutes (replacing the square bracket placeholder with your key): "REACT_APP_GOOGLE_MAP_KEY=[your api key here]".
 
 The end result should look something like "REACT_APP_GOOGLE_MAP_KEY=ACwxiSyvwOBKVZO2EIehvPVkrHt-126p-uMBFvnyX1BM"
 
