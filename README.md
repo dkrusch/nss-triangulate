@@ -44,11 +44,7 @@ The end result should look something like "REACT_APP_GOOGLE_MAP_KEY=ACwxiSyvwOBK
 
 In the console please run: 
 
-### `npm install --save google-maps-react`
-
-As well as: 
-
-### `npm install mathjs`
+### `npm install`
 
 Then in a new console window, navigate to the api folder within the directory and run: 
 
